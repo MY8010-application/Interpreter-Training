@@ -675,27 +675,47 @@ document.getElementById("question").classList.add("fade-in");
 document.getElementById("answer").style.display = "none";
 document.getElementById("showAnswerBtn").style.display = "inline-block";
 
-    switch(lang){
+   switch(lang){
 
-        case "en":
-            document.getElementById("answer").textContent = word.en;
-            break;
+    case "en":
+        document.getElementById("answer").textContent = word.en;
+        break;
 
-        case "zh":
-            document.getElementById("answer").textContent = word.zh;
-            break;
+    case "zh":
+        document.getElementById("answer").textContent = word.zh;
+        break;
 
-        case "pt":
-            document.getElementById("answer").textContent = word.pt;
-            break;
+    case "ko":
+        document.getElementById("answer").textContent = word.ko;
+        break;
 
-        case "mn":
-            document.getElementById("answer").textContent = word.mn;
-            break;
+    case "pt":
+        document.getElementById("answer").textContent = word.pt;
+        break;
 
-        default:
-            document.getElementById("answer").textContent = word.en;
-    }
+    case "fr":
+        document.getElementById("answer").textContent = word.fr;
+        break;
+
+    case "mn":
+        document.getElementById("answer").textContent = word.mn;
+        break;
+
+    case "vi":
+        document.getElementById("answer").textContent = word.vi;
+        break;
+
+    case "de":
+        document.getElementById("answer").textContent = word.de;
+        break;
+
+    case "km":
+        document.getElementById("answer").textContent = word.km;
+        break;
+
+    default:
+        document.getElementById("answer").textContent = "翻訳データがありません";
+}
 
     startTimer();
 }
