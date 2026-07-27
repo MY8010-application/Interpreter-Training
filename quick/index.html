@@ -210,9 +210,6 @@ INTERPRETER TRAINING
 学習したいコースと言語を選択してください
 </div>
 
-
-</div>
-
 <div class="card">
 
 <h2>📚 Vocabulary</h2>
@@ -322,17 +319,71 @@ onclick="selectLanguage('Expression','km')">
 </div>
 
 </div>
-    
+
+<div class="card">
+
+<h2>📖 All</h2>
+
+<div class="language-grid">
+
+<button id="All-en" class="language-btn en"
+onclick="selectLanguage('All','en')">
+🇺🇸 English
+</button>
+
+<button id="All-zh" class="language-btn zh"
+onclick="selectLanguage('All','zh')">
+🇨🇳 中文
+</button>
+
+<button id="All-ko" class="language-btn ko"
+onclick="selectLanguage('All','ko')">
+🇰🇷 한국어
+</button>
+
+<button id="All-pt" class="language-btn pt"
+onclick="selectLanguage('All','pt')">
+🇧🇷 Português
+</button>
+
+<button id="All-fr" class="language-btn fr"
+onclick="selectLanguage('All','fr')">
+🇫🇷 Français
+</button>
+
+<button id="All-mn" class="language-btn mn"
+onclick="selectLanguage('All','mn')">
+🇲🇳 Монгол
+</button>
+
+<button id="All-vi" class="language-btn vi"
+onclick="selectLanguage('All','vi')">
+🇻🇳 Tiếng Việt
+</button>
+
+<button id="All-de" class="language-btn de"
+onclick="selectLanguage('All','de')">
+🇩🇪 Deutsch
+</button>
+
+<button id="All-km" class="language-btn km"
+onclick="selectLanguage('All','km')">
+🇰🇭 ខ្មែរ
+</button>
+
 </div>
+
+</div>
+    
 
 <script>
 async function checkLanguages(){
 
     const categories = [
-        "General",
-        "Vocabulary",
-        "Expression"
-    ];
+    "Vocabulary",
+    "Expression",
+    "All"
+];
 
     const languages = [
         "en",
