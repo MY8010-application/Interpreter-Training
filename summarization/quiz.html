@@ -533,36 +533,37 @@ textarea{
 
     </div>
 
-    <!-- 要点 -->
-    <div class="card">
+ <!-- 要点 -->
+<div class="card">
 
-        <button id="hintBtn">
+    <button id="hintBtn">
+        💡 要点を見る
+    </button>
 
-            💡 要点を見る
+    <div id="hintArea" style="display:none;">
 
-        </button>
-
-        <div
-
-            id="hintArea"
-
-            style="display:none;"
-
-        >
-
-            <ul>
-
-                <li>要点①</li>
-
-                <li>要点②</li>
-
-                <li>要点③</li>
-
-            </ul>
-
-        </div>
+        <ul id="pointList">
+        </ul>
 
     </div>
+
+</div>
+
+<!-- 要約例 -->
+<div class="card">
+
+    <button id="summaryExampleBtn">
+        📝 要約例を見る
+    </button>
+
+    <div id="summaryExampleArea"
+         style="display:none;">
+
+        <p id="summaryExample"></p>
+
+    </div>
+
+</div>
 
     <!-- 自己評価 -->
     <div class="card">
@@ -623,4 +624,365 @@ textarea{
 
 </div>
 
+<script>
+
+let questions = [];
+let currentQuestionIndex = 0;
+let currentQuestion = null;
+
+
+// ============================
+// GASからデータ取得
+// ============================
+
+async function loadQuestions(){
+
+    try{
+
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbztXPsCnPdVcRt51CUd6Z_sN9fEaD9FS9WrJ2xDjRn-BYrovdSR_aZh3cjrf3d2dC6sFw/exec"
+        );
+
+        if(!response.ok){
+            throw new Error("データ取得に失敗しました");
+        }
+
+        const data = await response.json();
+
+
+        // ============================
+        // themeIdごとにまとめる
+        // ============================
+
+        const themes = {};
+
+        data.forEach(row => {
+
+            if(!themes[row.themeId]){
+
+                themes[row.themeId] = {
+                    themeId: row.themeId,
+                    texts: [],
+                    points: [],
+                    summary: row.summary,
+                    audio: row.audio
+                };
+
+            }
+
+            // 本文
+            if(row.text){
+                themes[row.themeId].texts.push({
+                    order: row.order,
+                    text: row.text
+                });
+            }
+
+            // 要点
+            if(row.point1){
+                themes[row.themeId].points.push(row.point1);
+            }
+
+            if(row.point2){
+                themes[row.themeId].points.push(row.point2);
+            }
+
+            if(row.point3){
+                themes[row.themeId].points.push(row.point3);
+            }
+
+            if(row.point4){
+                themes[row.themeId].points.push(row.point4);
+            }
+
+        });
+
+
+        // オブジェクト → 配列
+        questions = Object.values(themes);
+
+
+        // 順番を並べる
+        questions.forEach(question => {
+
+            question.texts.sort((a,b) =>
+                Number(a.order) - Number(b.order)
+            );
+
+        });
+
+
+        console.log("読み込んだ問題:", questions);
+
+
+        // 最初の問題を表示
+        showQuestion();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        document.getElementById("originalText").textContent =
+            "問題データを読み込めませんでした。";
+
+    }
+
+}
+
+
+// ============================
+// 問題を表示
+// ============================
+
+function showQuestion(){
+
+    if(questions.length === 0){
+        return;
+    }
+
+
+    currentQuestion =
+        questions[currentQuestionIndex];
+
+
+    // 問題番号
+    document.getElementById("questionNumber").textContent =
+        `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+
+
+    // 進捗バー
+    const progress =
+        ((currentQuestionIndex + 1) / questions.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+        progress + "%";
+
+
+    // ============================
+    // 本文
+    // ============================
+
+    const text =
+        currentQuestion.texts
+        .map(item => item.text)
+        .join("");
+
+
+    document.getElementById("originalText").textContent =
+        text;
+
+
+    // ============================
+    // 要点
+    // ============================
+
+    const pointList =
+        document.getElementById("pointList");
+
+    pointList.innerHTML = "";
+
+
+    currentQuestion.points.forEach(point => {
+
+        const li = document.createElement("li");
+
+        li.textContent = point;
+
+        pointList.appendChild(li);
+
+    });
+
+
+    // ============================
+    // 要約例
+    // ============================
+
+    document.getElementById("summaryExample").textContent =
+        currentQuestion.summary || "要約例はありません";
+
+
+    // ============================
+    // 音声
+    // ============================
+
+    const audio =
+        document.getElementById("audio");
+
+    audio.src =
+        currentQuestion.audio || "";
+
+
+    // 再生ボタンをリセット
+    document.getElementById("playBtn").textContent =
+        "▶ 再生";
+
+
+    // 入力欄をリセット
+    document.getElementById("summaryInput").value = "";
+
+
+    // 文字数リセット
+    document.getElementById("charCount").textContent =
+        "文字数：0文字";
+
+
+    // 表示エリアを閉じる
+    document.getElementById("textArea").style.display =
+        "none";
+
+    document.getElementById("hintArea").style.display =
+        "none";
+
+    document.getElementById("summaryExampleArea").style.display =
+        "none";
+
+
+    // 次へボタンを隠す
+    document.getElementById("nextBtn").style.display =
+        "none";
+
+}
+
+
+// ============================
+// 音声再生
+// ============================
+
+document.getElementById("playBtn").addEventListener(
+    "click",
+    function(){
+
+        const audio =
+            document.getElementById("audio");
+
+        if(!audio.src){
+            alert("音声が登録されていません。");
+            return;
+        }
+
+        audio.play();
+
+    }
+);
+
+
+// ============================
+// テキスト表示
+// ============================
+
+document.getElementById("toggleTextBtn").addEventListener(
+    "click",
+    function(){
+
+        const area =
+            document.getElementById("textArea");
+
+        if(area.style.display === "none"){
+
+            area.style.display = "block";
+
+            this.textContent =
+                "🙈 テキストを隠す";
+
+        }else{
+
+            area.style.display = "none";
+
+            this.textContent =
+                "👁 テキストを表示";
+
+        }
+
+    }
+);
+
+
+// ============================
+// 要点表示
+// ============================
+
+document.getElementById("hintBtn").addEventListener(
+    "click",
+    function(){
+
+        const area =
+            document.getElementById("hintArea");
+
+        if(area.style.display === "none"){
+
+            area.style.display = "block";
+
+            this.textContent =
+                "🙈 要点を隠す";
+
+        }else{
+
+            area.style.display = "none";
+
+            this.textContent =
+                "💡 要点を見る";
+
+        }
+
+    }
+);
+
+
+// ============================
+// 要約例表示
+// ============================
+
+document.getElementById("summaryExampleBtn").addEventListener(
+    "click",
+    function(){
+
+        const area =
+            document.getElementById("summaryExampleArea");
+
+        if(area.style.display === "none"){
+
+            area.style.display = "block";
+
+            this.textContent =
+                "🙈 要約例を隠す";
+
+        }else{
+
+            area.style.display = "none";
+
+            this.textContent =
+                "📝 要約例を見る";
+
+        }
+
+    }
+);
+
+
+// ============================
+// 文字数カウント
+// ============================
+
+document.getElementById("summaryInput").addEventListener(
+    "input",
+    function(){
+
+        const count =
+            this.value.length;
+
+        document.getElementById("charCount").textContent =
+            `文字数：${count}文字`;
+
+    }
+);
+
+
+// ============================
+// 起動
+// ============================
+
+loadQuestions();
+
+</script>
 </body>
