@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 
 <head>
@@ -79,7 +80,7 @@ body{
         0 15px 30px rgba(0,0,0,.18);
 }
 
-.level-btn{
+.start-btn{
 
     width:100%;
     margin:15px 0;
@@ -99,7 +100,7 @@ body{
 
 }
 
-.level-btn:hover{
+.start-btn:hover{
 
     transform:translateY(-3px);
 
@@ -108,7 +109,7 @@ body{
 
 }
 
-.level-btn:active{
+.start-btn:active{
 
     transform:translateY(1px);
 
@@ -128,7 +129,7 @@ body{
 
 }
 
-.level-btn{
+.start-btn{
 
     font-size:20px;
 
@@ -159,38 +160,17 @@ body{
 </div>
 
 <div class="logo">
-
 INTERPRETER TRAINING
-
 </div>
 
 <div class="description">
-
-学習したいレベルを選択してください
-
+Tenrikyo Script
 </div>
 
 <div class="card">
 
-<button class="level-btn"
-onclick="selectLevel('Beginner')">
-
-🟢 初級 - Beginner
-
-</button>
-
-<button class="level-btn"
-onclick="selectLevel('Intermediate')">
-
-🟡 中級 - Intermediate
-
-</button>
-
-<button class="level-btn"
-onclick="selectLevel('Advanced')">
-
-🔴 上級 - Advanced
-
+<button class="start-btn" onclick="startSummarization()">
+▶ START
 </button>
 
 </div>
@@ -199,11 +179,9 @@ onclick="selectLevel('Advanced')">
 
 <script>
 
-function selectLevel(level){
+function startSummarization(){
 
-    localStorage.setItem("level",level);
-
-    window.location.href="howto.html";
+    window.location.href = "howto.html";
 
 }
 
