@@ -549,21 +549,6 @@ textarea{
 
 </div>
 
-<!-- 要約例 -->
-<div class="card">
-
-    <button id="summaryExampleBtn">
-        📝 要約例を見る
-    </button>
-
-    <div id="summaryExampleArea"
-         style="display:none;">
-
-        <p id="summaryExample"></p>
-
-    </div>
-
-</div>
 
     <!-- 自己評価 -->
     <div class="card">
@@ -679,7 +664,6 @@ questions = data.map(row => {
         order: row.order,
         text: row.text,
         points: points,
-        summary: row.summary,
         audio: row.audio
     };
 
@@ -762,13 +746,6 @@ document.getElementById("originalText").textContent =
     });
 
 
-    // ============================
-    // 要約例
-    // ============================
-
-    document.getElementById("summaryExample").textContent =
-        currentQuestion.summary || "要約例はありません";
-
 
   // ============================
 // 音声
@@ -803,8 +780,6 @@ audio.src =
     document.getElementById("hintArea").style.display =
         "none";
 
-    document.getElementById("summaryExampleArea").style.display =
-        "none";
 
 
     // 次へボタンを隠す
@@ -897,36 +872,6 @@ document.getElementById("hintBtn").addEventListener(
     }
 );
 
-
-// ============================
-// 要約例表示
-// ============================
-
-document.getElementById("summaryExampleBtn").addEventListener(
-    "click",
-    function(){
-
-        const area =
-            document.getElementById("summaryExampleArea");
-
-        if(area.style.display === "none"){
-
-            area.style.display = "block";
-
-            this.textContent =
-                "🙈 要約例を隠す";
-
-        }else{
-
-            area.style.display = "none";
-
-            this.textContent =
-                "📝 要約例を見る";
-
-        }
-
-    }
-);
 
 
 // ============================
