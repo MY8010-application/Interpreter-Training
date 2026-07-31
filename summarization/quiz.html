@@ -635,27 +635,41 @@ async function loadQuestions(){
         const data = await response.json();
 
 
-       // ============================
-// 1行 = 1問として扱う
-// ============================
-
 // ============================
 // 選択されたテーマを取得
 // ============================
 
-const selectedThemes =
+const savedThemes =
     JSON.parse(localStorage.getItem("selectedThemes")) || [];
+
+const selectedThemes =
+    savedThemes.map(theme => String(theme).trim());
 
 
 // ============================
 // 選択されたテーマだけを問題にする
 // ============================
 
-const filteredData = data.filter(row =>
-    selectedThemes.includes(row.themeId)
-);
+const filteredData = data.filter(row => {
 
+    const themeId =
+        String(row.themeId).trim();
 
+    return selectedThemes.includes(themeId);
+
+});
+
+    if(filteredData.length === 0){
+
+    document.getElementById("questionNumber").textContent =
+        "問題がありません";
+
+    document.getElementById("originalText").textContent =
+        "選択したテーマの問題が見つかりません。";
+
+    return;
+
+}
 // ============================
 // 1行 = 1問として扱う
 // ============================
