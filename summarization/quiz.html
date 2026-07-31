@@ -802,16 +802,17 @@ function showQuestion(){
         currentQuestion.summary || "要約例はありません";
 
 
-    // ============================
-    // 音声
-    // ============================
+  // ============================
+// 音声
+// ============================
 
-    const audio =
-        document.getElementById("audio");
+const audio =
+    document.getElementById("audio");
 
-    audio.src =
-        currentQuestion.audio || "";
-
+audio.src =
+    currentQuestion.audio
+        ? "audio/" + currentQuestion.audio
+        : "";
 
     // 再生ボタンをリセット
     document.getElementById("playBtn").textContent =
