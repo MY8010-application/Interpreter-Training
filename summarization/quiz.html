@@ -50,6 +50,8 @@ body{
 
     padding:40px;
 
+    position:relative;
+
 }
 
 .app-title{
@@ -431,7 +433,9 @@ textarea{
 /* テーマ選択へ戻るボタン */
 
 .back-theme-btn{
-    position:fixed;
+
+    position:absolute;
+
     top:20px;
     right:20px;
 
@@ -451,22 +455,28 @@ textarea{
     z-index:1000;
 
     transition:.2s;
+
 }
 
 .back-theme-btn:hover{
+
     transform:translateY(-2px);
+
     background:#666;
+
 }
 
 @media(max-width:768px){
 
     .back-theme-btn{
-        top:10px;
-        right:10px;
+
+        top:15px;
+        right:15px;
 
         padding:8px 12px;
 
         font-size:12px;
+
     }
 
 }
