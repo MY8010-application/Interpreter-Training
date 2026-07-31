@@ -747,18 +747,32 @@ document.getElementById("originalText").textContent =
 
 
 
-  // ============================
+// ============================
 // 音声
 // ============================
 
 const audio =
     document.getElementById("audio");
 
-audio.src =
-    currentQuestion.audio
-        ? "audio/" + currentQuestion.audio
-        : "";
-    
+// 前の音声を停止
+audio.pause();
+
+// 音声をリセット
+audio.currentTime = 0;
+
+// 新しい音声を設定
+if(currentQuestion.audio){
+
+    audio.src =
+        "audio/" + currentQuestion.audio;
+
+    audio.load();
+
+}else{
+
+    audio.removeAttribute("src");
+
+}
 
     // 再生ボタンをリセット
     document.getElementById("playBtn").textContent =
