@@ -662,18 +662,6 @@ const filteredData = data.filter(row =>
 
 questions = filteredData.map(row => {
 
-questions.sort((a, b) => {
-
-    if(a.themeId !== b.themeId){
-
-        return a.themeId.localeCompare(b.themeId);
-
-    }
-
-    return Number(a.order) - Number(b.order);
-
-});
-    
     const points = [];
 
     if(row.point1){
@@ -699,6 +687,23 @@ questions.sort((a, b) => {
         points: points,
         audio: row.audio
     };
+
+});
+
+
+// ============================
+// テーマ → 順番の順に並べる
+// ============================
+
+questions.sort((a, b) => {
+
+    if(a.themeId !== b.themeId){
+
+        return a.themeId.localeCompare(b.themeId);
+
+    }
+
+    return Number(a.order) - Number(b.order);
 
 });
 
