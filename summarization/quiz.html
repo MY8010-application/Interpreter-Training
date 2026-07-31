@@ -479,7 +479,7 @@ textarea{
             ▶ 再生
         </button>
 
-        <audio id="audio"></audio>
+       <audio id="audio" preload="auto"></audio>
 
     </div>
 
@@ -758,6 +758,7 @@ audio.src =
     currentQuestion.audio
         ? "audio/" + currentQuestion.audio
         : "";
+    
 
     // 再生ボタンをリセット
     document.getElementById("playBtn").textContent =
