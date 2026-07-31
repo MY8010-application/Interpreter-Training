@@ -3,99 +3,203 @@
 <html lang="ja">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Summarization</title>
 
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
-<meta name="theme-color" content="#4285f4">
+
+<meta name="theme-color"
+content="#4285f4">
 
 <style>
 
-body{
-    font-family:'Segoe UI', Arial, sans-serif;
-    background:#cccccc;
-    text-align:center;
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:#cccccc;
+
+    color:#333;
+
+    text-align:center;
+
     padding:20px;
+
 }
 
 .container{
+
     max-width:700px;
-    margin:auto;
-    margin-top:30px;
+
+    margin:40px auto;
+
     background:#e9e9e9;
-    padding:40px;
+
     border-radius:24px;
+
+    padding:40px;
+
 }
 
 .app-title{
+
     display:inline-block;
+
     background:white;
-    color:black;
+
     padding:18px 40px;
+
     border-radius:20px;
+
+    margin-bottom:25px;
 
     box-shadow:
         0 6px 0 #d9defa,
         0 12px 24px rgba(0,0,0,.08);
 
-    margin-bottom:25px;
 }
 
 .title-main{
+
     font-size:34px;
+
     font-weight:800;
+
 }
 
 .title-sub{
-    font-size:18px;
+
     margin-top:5px;
+
+    font-size:18px;
+
     font-weight:600;
+
 }
 
 .logo{
+
     color:#4255ff;
+
     font-size:14px;
+
     font-weight:bold;
+
     letter-spacing:1px;
-    margin-bottom:20px;
+
+    margin-bottom:25px;
+
 }
 
-.description{
-    color:#666;
-    font-size:18px;
-    line-height:1.6;
-    margin-bottom:30px;
-}
+
+/* ============================
+   練習の流れ
+============================ */
 
 .card{
+
     background:white;
-    border-radius:24px;
-    padding:35px;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:left;
 
     box-shadow:
-        0 15px 30px rgba(0,0,0,.18);
+        0 10px 25px rgba(0,0,0,.12);
+
 }
+
+.card h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.step{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+.icon{
+
+    font-size:34px;
+
+    width:50px;
+
+    text-align:center;
+
+    flex-shrink:0;
+
+}
+
+.text h3{
+
+    margin:0 0 5px;
+
+    font-size:20px;
+
+}
+
+.text p{
+
+    margin:0;
+
+    color:#666;
+
+    line-height:1.6;
+
+}
+
+
+/* ============================
+   テーマ選択ボタン
+============================ */
 
 .start-btn{
 
+    margin-top:15px;
+
     width:100%;
-    margin:15px 0;
-    padding:22px;
+
+    padding:20px;
 
     border:none;
+
     border-radius:18px;
 
     background:#4255ff;
+
     color:white;
 
     font-size:24px;
+
     font-weight:bold;
 
     cursor:pointer;
+
     transition:.2s;
 
 }
@@ -105,7 +209,7 @@ body{
     transform:translateY(-3px);
 
     box-shadow:
-    0 8px 20px rgba(66,85,255,.3);
+        0 8px 20px rgba(66,85,255,.3);
 
 }
 
@@ -115,9 +219,43 @@ body{
 
 }
 
+
+/* ============================
+   戻るボタン
+============================ */
+
+.back-btn{
+
+    margin-top:15px;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#888;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+/* ============================
+   スマホ
+============================ */
+
 @media(max-width:768px){
 
 .container{
+
+    margin:20px;
 
     padding:25px;
 
@@ -126,6 +264,12 @@ body{
 .title-main{
 
     font-size:28px;
+
+}
+
+.step{
+
+    flex-direction:row;
 
 }
 
@@ -147,45 +291,152 @@ body{
 
 <div class="container">
 
+<!-- ============================
+     タイトル
+============================ -->
+
 <div class="app-title">
 
+```
 <div class="title-main">
-📝 Summarization
+    📝 Summarization
 </div>
 
 <div class="title-sub">
-要約練習
+    要約練習
 </div>
+```
 
 </div>
 
 <div class="logo">
+
+```
 INTERPRETER TRAINING
+```
+
 </div>
 
-<div class="description">
-Tenrikyo Script
-</div>
+<!-- ============================
+     練習の流れ
+============================ -->
 
 <div class="card">
 
-<button class="start-btn" onclick="startSummarization()">
-テーマ選択
+```
+<h2>練習の流れ</h2>
+
+
+<div class="step">
+
+    <div class="icon">🎧</div>
+
+    <div class="text">
+
+        <h3>① 音声を聞く</h3>
+
+        <p>
+            最後まで集中して聞きましょう。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="step">
+
+    <div class="icon">🧠</div>
+
+    <div class="text">
+
+        <h3>② 内容を整理する</h3>
+
+        <p>
+            話の流れや重要なポイントを頭の中で整理します。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="step">
+
+    <div class="icon">✍️</div>
+
+    <div class="text">
+
+        <h3>③ 要約する</h3>
+
+        <p>
+            聞いた内容を、自分の言葉で簡潔にまとめます。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="step">
+
+    <div class="icon">✅</div>
+
+    <div class="text">
+
+        <h3>④ 要点を確認する</h3>
+
+        <p>
+            重要なポイントを確認し、抜けや誤りがないか見直します。
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="step">
+
+    <div class="icon">📊</div>
+
+    <div class="text">
+
+        <h3>⑤ 自己評価する</h3>
+
+        <p>
+            「できた」「もう少し」「がんばる」で自己評価しましょう。
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ============================
+     テーマ選択へ
+============================ -->
+
+<button
+    class="start-btn"
+    onclick="location.href='howto.html'">
+
+    テーマ選択
+
 </button>
 
-</div>
+
+<button
+    class="back-btn"
+    onclick="location.href='../index.html'">
+
+    ← 戻る
+
+</button>
+```
 
 </div>
 
-<script>
-
-function startSummarization(){
-
-    window.location.href = "howto.html";
-
-}
-
-</script>
+</div>
 
 </body>
 
