@@ -951,6 +951,42 @@ document.getElementById("summaryInput").addEventListener(
 // 起動
 // ============================
 
+// ============================
+// 自己評価
+// ============================
+
+function rate(result){
+
+    console.log("自己評価:", result);
+
+    // 次へボタンを表示
+    document.getElementById("nextBtn").style.display =
+        "block";
+
+}
+
+// ============================
+// 次の問題
+// ============================
+
+document.getElementById("nextBtn").addEventListener(
+    "click",
+    function(){
+
+        currentQuestionIndex++;
+
+        if(currentQuestionIndex >= questions.length){
+
+            alert("🎉 全ての問題が終了しました！");
+            return;
+
+        }
+
+        showQuestion();
+
+    }
+);
+    
 loadQuestions();
 
 </script>
