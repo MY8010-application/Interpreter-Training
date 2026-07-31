@@ -639,8 +639,41 @@ async function loadQuestions(){
 // 1行 = 1問として扱う
 // ============================
 
-questions = data.map(row => {
+// ============================
+// 選択されたテーマを取得
+// ============================
 
+const selectedThemes =
+    JSON.parse(localStorage.getItem("selectedThemes")) || [];
+
+
+// ============================
+// 選択されたテーマだけを問題にする
+// ============================
+
+const filteredData = data.filter(row =>
+    selectedThemes.includes(row.themeId)
+);
+
+
+// ============================
+// 1行 = 1問として扱う
+// ============================
+
+questions = filteredData.map(row => {
+
+questions.sort((a, b) => {
+
+    if(a.themeId !== b.themeId){
+
+        return a.themeId.localeCompare(b.themeId);
+
+    }
+
+    return Number(a.order) - Number(b.order);
+
+});
+    
     const points = [];
 
     if(row.point1){
