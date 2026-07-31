@@ -650,66 +650,40 @@ async function loadQuestions(){
         const data = await response.json();
 
 
-        // ============================
-        // themeIdごとにまとめる
-        // ============================
+       // ============================
+// 1行 = 1問として扱う
+// ============================
 
-        const themes = {};
+questions = data.map(row => {
 
-        data.forEach(row => {
+    const points = [];
 
-            if(!themes[row.themeId]){
+    if(row.point1){
+        points.push(row.point1);
+    }
 
-                themes[row.themeId] = {
-                    themeId: row.themeId,
-                    texts: [],
-                    points: [],
-                    summary: row.summary,
-                    audio: row.audio
-                };
+    if(row.point2){
+        points.push(row.point2);
+    }
 
-            }
+    if(row.point3){
+        points.push(row.point3);
+    }
 
-            // 本文
-            if(row.text){
-                themes[row.themeId].texts.push({
-                    order: row.order,
-                    text: row.text
-                });
-            }
+    if(row.point4){
+        points.push(row.point4);
+    }
 
-            // 要点
-            if(row.point1){
-                themes[row.themeId].points.push(row.point1);
-            }
+    return {
+        themeId: row.themeId,
+        order: row.order,
+        text: row.text,
+        points: points,
+        summary: row.summary,
+        audio: row.audio
+    };
 
-            if(row.point2){
-                themes[row.themeId].points.push(row.point2);
-            }
-
-            if(row.point3){
-                themes[row.themeId].points.push(row.point3);
-            }
-
-            if(row.point4){
-                themes[row.themeId].points.push(row.point4);
-            }
-
-        });
-
-
-        // オブジェクト → 配列
-        questions = Object.values(themes);
-
-
-        // 順番を並べる
-        questions.forEach(question => {
-
-            question.texts.sort((a,b) =>
-                Number(a.order) - Number(b.order)
-            );
-
-        });
+});
 
 
         console.log("読み込んだ問題:", questions);
