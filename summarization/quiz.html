@@ -733,18 +733,12 @@ function showQuestion(){
         progress + "%";
 
 
-    // ============================
-    // 本文
-    // ============================
+  // ============================
+// 本文
+// ============================
 
-    const text =
-        currentQuestion.texts
-        .map(item => item.text)
-        .join("");
-
-
-    document.getElementById("originalText").textContent =
-        text;
+document.getElementById("originalText").textContent =
+    currentQuestion.text || "";
 
 
     // ============================
