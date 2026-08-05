@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Short Interpretation</title>
+
+<link rel="icon" href="../icon.png">
+<link rel="apple-touch-icon" href="../icon.png">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:#cccccc;
+
+    color:#333;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+.container{
+
+    max-width:850px;
+
+    margin:auto;
+
+    background:#e9e9e9;
+
+    border-radius:24px;
+
+    padding:40px;
+
+}
+
+
+/* ============================
+   タイトル
+============================ */
+
+.app-title{
+
+    display:inline-block;
+
+    background:white;
+
+    padding:18px 40px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 6px 0 #d9defa,
+        0 12px 24px rgba(0,0,0,.08);
+
+}
+
+.title-main{
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.title-sub{
+
+    margin-top:5px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.logo{
+
+    color:#4255ff;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ============================
+   問題情報
+============================ */
+
+.question-info{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+
+}
+
+.theme-name{
+
+    font-size:16px;
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+
+/* ============================
+   進捗バー
+============================ */
+
+.progress{
+
+    width:100%;
+
+    height:18px;
+
+    background:#d9d9d9;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:30px;
+
+}
+
+.progress-fill{
+
+    width:0%;
+
+    height:100%;
+
+    background:#4255ff;
+
+    transition:.3s;
+
+}
+
+
+/* ============================
+   カード
+============================ */
+
+.card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+
+}
+
+.card h2{
+
+    margin-bottom:20px;
+
+}
+
+
+/* ============================
+   音声
+============================ */
+
+#playBtn{
+
+    width:100%;
+
+    padding:20px;
+
+    background:#4255ff;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+#playBtn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(66,85,255,.3);
+
+}
+
+#playBtn:active{
+
+    transform:translateY(1px);
+
+}
+
+.challenge-message{
+
+    margin-top:12px;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+
+/* ============================
+   通訳完了ボタン
+============================ */
+
+.complete-btn{
+
+    width:100%;
+
+    padding:20px;
+
+    background:#10b981;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    margin-top:20px;
+
+}
+
+.complete-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ============================
+   次へ
+============================ */
+
+#nextBtn{
+
+    display:none;
+
+    width:100%;
+
+    padding:20px;
+
+    background:#4255ff;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+}
+
+
+/* ============================
+   振り返り
+============================ */
+
+#reviewArea{
+
+    display:none;
+
+}
+
+.review-intro{
+
+    color:#666;
+
+    line-height:1.7;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ============================
+   原文一覧
+============================ */
+
+.original-list{
+
+    text-align:left;
+
+    background:#f5f5f5;
+
+    border-radius:16px;
+
+    padding:20px 25px;
+
+    margin-bottom:30px;
+
+}
+
+.original-item{
+
+    padding:14px 0;
+
+    border-bottom:1px solid #ddd;
+
+    line-height:1.7;
+
+}
+
+.original-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.original-number{
+
+    font-weight:bold;
+
+    color:#4255ff;
+
+    margin-right:8px;
+
+}
+
+
+/* ============================
+   評価基準
+============================ */
+
+.criteria{
+
+    text-align:left;
+
+    background:#f8f8f8;
+
+    border-radius:16px;
+
+    padding:20px 25px;
+
+    margin-bottom:25px;
+
+}
+
+.criteria h3{
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+.criteria ul{
+
+    padding-left:25px;
+
+}
+
+.criteria li{
+
+    margin-bottom:10px;
+
+    line-height:1.5;
+
+}
+
+
+/* ============================
+   評価ボタン
+============================ */
+
+.review-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.review-buttons button{
+
+    flex:1;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.good{
+
+    background:#4CAF50;
+
+    color:white;
+
+}
+
+.normal{
+
+    background:#FFC107;
+
+}
+
+.bad{
+
+    background:#F44336;
+
+    color:white;
+
+}
+
+
+/* ============================
+   終了・次テーマ
+============================ */
+
+#nextThemeBtn{
+
+    display:none;
+
+    width:100%;
+
+    padding:20px;
+
+    margin-top:20px;
+
+    background:#4255ff;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+}
+
+#backBtn{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    background:#888;
+
+    color:white;
+
+    font-size:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+}
+
+
+/* ============================
+   スマホ
+============================ */
+
+@media(max-width:768px){
+
+.container{
+
+    padding:22px;
+
+}
+
+.title-main{
+
+    font-size:28px;
+
+}
+
+.review-buttons{
+
+    flex-direction:column;
+
+}
+
+#playBtn{
+
+    font-size:20px;
+
+}
+
+.complete-btn{
+
+    font-size:20px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- ============================
+     タイトル
+============================ -->
+
+<div class="app-title">
+
+<div class="title-main">
+🎤 Short Interpretation
+</div>
+
+<div class="title-sub">
+短文通訳練習
+</div>
+
+</div>
+
+<div class="logo">
+INTERPRETER TRAINING
+</div>
+
+
+<!-- ============================
+     問題エリア
+============================ -->
+
+<div id="questionArea">
+
+
+<div class="theme-name"
+id="themeName">
+
+</div>
+
+
+<div class="question-info"
+id="questionNumber">
+
+Question 1 / 20
+
+</div>
+
+
+<div class="progress">
+
+<div
+class="progress-fill"
+id="progressFill">
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+
+<h2>🎧 音声を聞いて通訳してください</h2>
+
+
+<audio id="audio"></audio>
+
+
+<button
+id="playBtn">
+
+▶ 再生
+
+</button>
+
+
+<div
+class="challenge-message"
+id="challengeMessage">
+
+</div>
+
+
+<button
+class="complete-btn"
+id="completeBtn">
+
+通訳できた → 次へ
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ============================
+     テーマ終了・振り返り
+============================ -->
+
+<div id="reviewArea">
+
+
+<div class="card">
+
+
+<h2>
+🎉 テーマ終了！
+</h2>
+
+
+<div class="review-intro">
+
+今回のテーマの通訳を振り返りましょう。<br>
+下に今回の問題の原文をまとめて表示しています。
+
+</div>
+
+
+<!-- 原文一覧 -->
+
+<div
+class="original-list"
+id="originalList">
+
+</div>
+
+
+<!-- 評価基準 -->
+
+<div class="criteria">
+
+<h3>
+📊 自己評価のポイント
+</h3>
+
+<ul>
+
+<li>
+素早く通訳できたか
+</li>
+
+<li>
+意味を正確に伝えられたか
+</li>
+
+<li>
+自然な表現で通訳できたか
+</li>
+
+<li>
+適切な言葉を選べたか
+</li>
+
+<li>
+最後まで途切れずに通訳できたか
+</li>
+
+</ul>
+
+</div>
+
+
+<h3>
+今回の総合評価
+</h3>
+
+
+<div class="review-buttons">
+
+
+<button
+class="good"
+onclick="finishReview('good')">
+
+🟢 できた
+
+</button>
+
+
+<button
+class="normal"
+onclick="finishReview('normal')">
+
+🟡 もう少し
+
+</button>
+
+
+<button
+class="bad"
+onclick="finishReview('bad')">
+
+🔴 がんばる
+
+</button>
+
+
+</div>
+
+
+<button
+id="nextThemeBtn">
+
+次のテーマへ
+
+</button>
+
+
+<button
+id="backBtn"
+onclick="location.href='howto.html'">
+
+← テーマ選択へ戻る
+
+</button>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* ============================
+   基本設定
+============================ */
+
+let questions = [];
+
+let currentQuestionIndex = 0;
+
+let currentQuestion = null;
+
+let selectedThemes = [];
+
+let currentThemeIndex = 0;
+
+let currentThemeQuestions = [];
+
+let currentLevel = "normal";
+
+let audioPlayed = false;
+
+
+/* ============================
+   テーマ名
+============================ */
+
+const themeNames = {
+
+    t001:"概要",
+
+    t002:"親神様",
+
+    t003:"教祖",
+
+    t004:"ぢば",
+
+    t005:"陽気ぐらし",
+
+    t006:"つとめ",
+
+    t007:"さづけ・ようぼく"
+
+};
+
+
+/* ============================
+   GASからデータ取得
+============================ */
+
+async function loadQuestions(){
+
+    try{
+
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbztXPsCnPdVcRt51CUd6Z_sN9fEaD9FS9WrJ2xDjRn-BYrovdSR_aZh3cjrf3d2dC6sFw/exec"
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "データ取得に失敗しました"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        /* ============================
+           選択テーマ取得
+        ============================ */
+
+        selectedThemes =
+            JSON.parse(
+                localStorage.getItem(
+                    "shortSelectedThemes"
+                )
+            ) || [];
+
+
+        /* ============================
+           レベル取得
+        ============================ */
+
+        currentLevel =
+            localStorage.getItem(
+                "shortLevel"
+            ) || "normal";
+
+
+        /* ============================
+           テーマがない場合
+        ============================ */
+
+        if(selectedThemes.length === 0){
+
+            alert(
+                "テーマが選択されていません。"
+            );
+
+            location.href =
+                "howto.html";
+
+            return;
+
+        }
+
+
+        /* ============================
+           選択テーマだけ取得
+        ============================ */
+
+        questions = data.filter(row =>
+            selectedThemes.includes(
+                row.themeId
+            )
+        );
+
+
+        /* ============================
+           テーマ順・問題順
+        ============================ */
+
+        questions.sort((a,b) => {
+
+            const themeA =
+                selectedThemes.indexOf(
+                    a.themeId
+                );
+
+            const themeB =
+                selectedThemes.indexOf(
+                    b.themeId
+                );
+
+
+            if(themeA !== themeB){
+
+                return themeA - themeB;
+
+            }
+
+
+            return Number(a.order) -
+                   Number(b.order);
+
+        });
+
+
+        /* ============================
+           最初のテーマ開始
+        ============================ */
+
+        startTheme();
+
+    }
+
+
+    catch(error){
+
+        document.getElementById(
+            "questionArea"
+        ).innerHTML =
+            "問題データを読み込めませんでした。";
+
+    }
+
+}
+
+
+/* ============================
+   テーマ開始
+============================ */
+
+function startTheme(){
+
+    const themeId =
+        selectedThemes[currentThemeIndex];
+
+
+    currentThemeQuestions =
+        questions.filter(row =>
+            row.themeId === themeId
+        );
+
+
+    if(currentThemeQuestions.length === 0){
+
+        alert(
+            "このテーマには問題がありません。"
+        );
+
+        return;
+
+    }
+
+
+    currentQuestionIndex = 0;
+
+
+    document.getElementById(
+        "questionArea"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "reviewArea"
+    ).style.display = "none";
+
+
+    showQuestion();
+
+}
+
+
+/* ============================
+   問題表示
+============================ */
+
+function showQuestion(){
+
+    currentQuestion =
+        currentThemeQuestions[
+            currentQuestionIndex
+        ];
+
+
+    /* ============================
+       テーマ名
+    ============================ */
+
+    document.getElementById(
+        "themeName"
+    ).textContent =
+        themeNames[
+            currentQuestion.themeId
+        ] || currentQuestion.themeId;
+
+
+    /* ============================
+       問題番号
+    ============================ */
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent =
+        `Question ${
+            currentQuestionIndex + 1
+        } / ${
+            currentThemeQuestions.length
+        }`;
+
+
+    /* ============================
+       進捗
+    ============================ */
+
+    const progress =
+        (
+            (currentQuestionIndex + 1) /
+            currentThemeQuestions.length
+        ) * 100;
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        progress + "%";
+
+
+    /* ============================
+       音声
+    ============================ */
+
+    const audio =
+        document.getElementById("audio");
+
+
+    audio.pause();
+
+    audio.currentTime = 0;
+
+
+    audioPlayed = false;
+
+
+    if(currentQuestion.audio){
+
+        audio.src =
+            "../audio/" +
+            currentQuestion.audio;
+
+        audio.load();
+
+    }else{
+
+        audio.removeAttribute("src");
+
+    }
+
+
+    /* ============================
+       チャレンジ表示
+    ============================ */
+
+    const challengeMessage =
+        document.getElementById(
+            "challengeMessage"
+        );
+
+
+    if(currentLevel === "challenge"){
+
+        challengeMessage.textContent =
+            "🔥 チャレンジ：音声は1回のみ再生できます。";
+
+    }else{
+
+        challengeMessage.textContent =
+            "ノーマル：音声を何度でも再生できます。";
+
+    }
+
+
+    /* ============================
+       ボタン
+    ============================ */
+
+    document.getElementById(
+        "playBtn"
+    ).textContent =
+        "▶ 再生";
+
+
+    document.getElementById(
+        "completeBtn"
+    ).style.display =
+        "block";
+
+}
+
+
+/* ============================
+   音声再生
+============================ */
+
+document.getElementById(
+    "playBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        const audio =
+            document.getElementById(
+                "audio"
+            );
+
+
+        if(!audio.src){
+
+            alert(
+                "音声が登録されていません。"
+            );
+
+            return;
+
+        }
+
+
+        /* ============================
+           チャレンジ
+        ============================ */
+
+        if(
+            currentLevel === "challenge" &&
+            audioPlayed
+        ){
+
+            alert(
+                "チャレンジレベルでは、音声は1回のみ再生できます。"
+            );
+
+            return;
+
+        }
+
+
+        audio.play();
+
+
+        audioPlayed = true;
+
+
+        if(
+            currentLevel === "challenge"
+        ){
+
+            document.getElementById(
+                "playBtn"
+            ).textContent =
+                "🔒 再生済み";
+
+        }
+
+    }
+);
+
+
+/* ============================
+   通訳完了 → 次へ
+============================ */
+
+document.getElementById(
+    "completeBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        currentQuestionIndex++;
+
+
+        /* ============================
+           テーマ終了
+        ============================ */
+
+        if(
+            currentQuestionIndex >=
+            currentThemeQuestions.length
+        ){
+
+            showThemeReview();
+
+            return;
+
+        }
+
+
+        showQuestion();
+
+    }
+);
+
+
+/* ============================
+   テーマ終了画面
+============================ */
+
+function showThemeReview(){
+
+    document.getElementById(
+        "questionArea"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "reviewArea"
+    ).style.display =
+        "block";
+
+
+    const list =
+        document.getElementById(
+            "originalList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    currentThemeQuestions.forEach(
+        (question,index) => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "original-item";
+
+
+            div.innerHTML =
+                `<span class="original-number">
+                    ${index + 1}.
+                </span>
+                ${question.text || ""}`;
+
+
+            list.appendChild(div);
+
+        }
+    );
+
+
+    /* ============================
+       最後のテーマか確認
+    ============================ */
+
+    const nextThemeBtn =
+        document.getElementById(
+            "nextThemeBtn"
+        );
+
+
+    if(
+        currentThemeIndex <
+        selectedThemes.length - 1
+    ){
+
+        nextThemeBtn.style.display =
+            "block";
+
+        nextThemeBtn.textContent =
+            "次のテーマへ";
+
+    }else{
+
+        nextThemeBtn.style.display =
+            "block";
+
+        nextThemeBtn.textContent =
+            "練習を終了する";
+
+    }
+
+}
+
+
+/* ============================
+   自己評価
+============================ */
+
+function finishReview(result){
+
+    localStorage.setItem(
+        "shortLastReview",
+        result
+    );
+
+
+    /* ============================
+       次のテーマがある場合
+    ============================ */
+
+    if(
+        currentThemeIndex <
+        selectedThemes.length - 1
+    ){
+
+        currentThemeIndex++;
+
+        document.getElementById(
+            "nextThemeBtn"
+        ).style.display =
+            "block";
+
+    }else{
+
+        alert(
+            "🎉 すべてのテーマの練習が終了しました！"
+        );
+
+        location.href =
+            "howto.html";
+
+    }
+
+}
+
+
+/* ============================
+   次のテーマ
+============================ */
+
+document.getElementById(
+    "nextThemeBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        if(
+            currentThemeIndex <
+            selectedThemes.length - 1
+        ){
+
+            currentThemeIndex++;
+
+            startTheme();
+
+        }else{
+
+            location.href =
+                "howto.html";
+
+        }
+
+    }
+);
+
+
+/* ============================
+   起動
+============================ */
+
+loadQuestions();
+
+</script>
+
+</body>
+
+</html>
