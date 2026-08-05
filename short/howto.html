@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>How to Use - Short Interpretation</title>
+
+<link rel="icon" href="../icon.png">
+<link rel="apple-touch-icon" href="../icon.png">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:#cccccc;
+
+    color:#333;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+.container{
+
+    max-width:700px;
+
+    margin:40px auto;
+
+    background:#e9e9e9;
+
+    border-radius:24px;
+
+    padding:40px;
+
+}
+
+.app-title{
+
+    display:inline-block;
+
+    background:white;
+
+    padding:18px 40px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 6px 0 #d9defa,
+        0 12px 24px rgba(0,0,0,.08);
+
+}
+
+.title-main{
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.title-sub{
+
+    margin-top:5px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.logo{
+
+    color:#4255ff;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ============================
+   カード
+============================ */
+
+.card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:left;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+/* ============================
+   テーマ選択
+============================ */
+
+.card h2{
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+}
+
+.description{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:25px;
+
+    line-height:1.6;
+
+}
+
+.theme-options{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.theme-option{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:17px;
+
+    background:#f5f5f5;
+
+    border:2px solid #ddd;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.theme-option:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#4255ff;
+
+}
+
+.theme-option input{
+
+    width:21px;
+
+    height:21px;
+
+    accent-color:#4255ff;
+
+    flex-shrink:0;
+
+}
+
+.theme-option span{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+/* ============================
+   ボタン
+============================ */
+
+.start-btn{
+
+    margin-top:30px;
+
+    width:100%;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#4255ff;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.start-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(66,85,255,.3);
+
+}
+
+.start-btn:active{
+
+    transform:translateY(1px);
+
+}
+
+
+.back-btn{
+
+    margin-top:15px;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#888;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+/* ============================
+   スマホ
+============================ */
+
+@media(max-width:768px){
+
+.container{
+
+    margin:20px;
+
+    padding:25px;
+
+}
+
+.title-main{
+
+    font-size:28px;
+
+}
+
+.theme-option span{
+
+    font-size:16px;
+
+}
+
+.start-btn{
+
+    font-size:20px;
+
+    padding:18px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ============================
+     タイトル
+============================ -->
+
+<div class="app-title">
+
+<div class="title-main">
+🎤 Short Interpretation
+</div>
+
+<div class="title-sub">
+テーマ選択
+</div>
+
+</div>
+
+<div class="logo">
+INTERPRETER TRAINING
+</div>
+
+<!-- ============================
+     テーマ選択カード
+============================ -->
+
+<div class="card">
+
+<h2>📚 テーマを選択</h2>
+
+<div class="description">
+
+練習したいテーマを選択してください。<br>
+複数のテーマを選択できます。
+
+</div>
+
+<div class="theme-options">
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t001">
+
+<span>
+概要
+</span>
+
+</label>
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t002">
+
+<span>
+親神様
+</span>
+
+</label>
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t003">
+
+<span>
+教祖
+</span>
+
+</label>
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t004">
+
+<span>
+ぢば
+</span>
+
+</label>
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t005">
+
+<span>
+陽気ぐらし
+</span>
+
+</label>
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t006">
+
+<span>
+つとめ
+</span>
+
+</label>
+
+<label class="theme-option">
+
+<input
+type="checkbox"
+name="theme"
+value="t007">
+
+<span>
+さづけ・ようぼく
+</span>
+
+</label>
+
+</div>
+
+<!-- ============================
+     練習開始
+============================ -->
+
+<button
+class="start-btn"
+onclick="startTraining()">
+
+練習を始める
+
+</button>
+
+<button
+class="back-btn"
+onclick="location.href='index.html'">
+
+← レベル選択へ戻る
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* ============================
+   テーマ選択
+============================ */
+
+function startTraining(){
+
+    const selected =
+        document.querySelectorAll(
+            'input[name="theme"]:checked'
+        );
+
+
+    if(selected.length === 0){
+
+        alert("テーマを1つ以上選択してください。");
+
+        return;
+
+    }
+
+
+    const themes = [];
+
+
+    selected.forEach(item => {
+
+        themes.push(item.value);
+
+    });
+
+
+    /* ============================
+       選択したテーマを保存
+    ============================ */
+
+    localStorage.setItem(
+        "shortSelectedThemes",
+        JSON.stringify(themes)
+    );
+
+
+    /* ============================
+       Quizへ
+    ============================ */
+
+    location.href = "quiz.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
