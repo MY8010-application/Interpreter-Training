@@ -2,19 +2,15 @@
 <html lang="ja">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Summarization</title>
 
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 
-<meta name="theme-color"
-content="#4285f4">
+<meta name="theme-color" content="#4285f4">
 
 <style>
 
@@ -25,479 +21,283 @@ content="#4285f4">
 }
 
 body{
-
     font-family:'Segoe UI',Arial,sans-serif;
-
     background:#cccccc;
-
     color:#333;
-
     text-align:center;
-
     padding:20px;
-
 }
 
 .container{
-
     max-width:850px;
-
     margin:auto;
-
     background:#e9e9e9;
-
     border-radius:24px;
-
     padding:40px;
-
     position:relative;
-
 }
 
 .app-title{
-
     display:inline-block;
-
     background:white;
-
     padding:18px 40px;
-
     border-radius:20px;
-
     margin-bottom:25px;
-
     box-shadow:
         0 6px 0 #d9defa,
         0 12px 24px rgba(0,0,0,.08);
-
 }
 
 .title-main{
-
     font-size:34px;
-
     font-weight:800;
-
 }
 
 .title-sub{
-
     margin-top:5px;
-
     font-size:18px;
-
     font-weight:600;
-
 }
 
 .logo{
-
     color:#4255ff;
-
     font-size:14px;
-
     font-weight:bold;
-
     letter-spacing:1px;
-
     margin-bottom:25px;
-
 }
 
 .question-info{
-
     font-size:22px;
-
     font-weight:bold;
-
     margin-bottom:15px;
-
 }
 
 .progress{
-
     width:100%;
-
     height:18px;
-
     background:#d9d9d9;
-
     border-radius:20px;
-
     overflow:hidden;
-
     margin-bottom:35px;
-
 }
 
 .progress-fill{
-
     width:0%;
-
     height:100%;
-
     background:#4255ff;
-
     transition:.3s;
-
 }
 
 .card{
-
     background:white;
-
     border-radius:22px;
-
     padding:30px;
-
     margin-bottom:30px;
-
     box-shadow:
         0 10px 25px rgba(0,0,0,.12);
-
 }
 
 .card h2{
-
     margin-bottom:20px;
-
 }
 
 button{
-
     border:none;
-
     border-radius:18px;
-
     cursor:pointer;
-
     transition:.2s;
-
 }
 
 button:hover{
-
     transform:translateY(-3px);
-
 }
 
 button:active{
-
     transform:translateY(1px);
-
 }
-
-/* 音声ボタン */
 
 #playBtn{
-
     width:100%;
-
     padding:18px;
-
     background:#4255ff;
-
     color:white;
-
     font-size:24px;
-
     font-weight:bold;
-
 }
 
-/* テキスト表示ボタン */
-
 #toggleTextBtn{
-
     width:100%;
-
     padding:16px;
-
     background:#6b7280;
-
     color:white;
-
     font-size:20px;
-
 }
 
 #textArea{
-
     display:none;
-
     margin-top:20px;
-
     background:#f5f5f5;
-
     border-radius:16px;
-
     padding:20px;
-
     text-align:left;
-
     line-height:1.8;
-
 }
 
-/* 要約入力 */
-
 #charCount{
-
     font-size:20px;
-
     font-weight:bold;
-
     margin-bottom:8px;
-
 }
 
 #charGuide{
-
     color:#666;
-
     margin-bottom:15px;
-
 }
 
 textarea{
-
     width:100%;
-
     min-height:220px;
-
     resize:vertical;
-
     padding:18px;
-
     font-size:18px;
-
     border:2px solid #ddd;
-
     border-radius:18px;
-
     outline:none;
-
 }
 
 textarea:focus{
-
     border-color:#4255ff;
-
 }
 
-/* 要点 */
-
 #hintBtn{
-
     width:100%;
-
     padding:16px;
-
     background:#10b981;
-
     color:white;
-
     font-size:20px;
-
 }
 
 #hintArea{
-
     display:none;
-
     margin-top:20px;
-
     background:#f8f8f8;
-
     border-radius:16px;
-
     padding:20px;
-
     text-align:left;
-
 }
 
 #hintArea ul{
-
     padding-left:25px;
-
 }
 
 #hintArea li{
-
     margin-bottom:10px;
-
 }
 
-/* 自己評価 */
-
 .review-buttons{
-
     display:flex;
-
     gap:15px;
-
 }
 
 .review-buttons button{
-
     flex:1;
-
     padding:18px;
-
     font-size:20px;
-
     font-weight:bold;
-
 }
 
 .good{
-
     background:#4CAF50;
-
     color:white;
-
 }
 
 .normal{
-
     background:#FFC107;
-
 }
 
 .bad{
-
     background:#F44336;
-
     color:white;
-
 }
-
-/* 次へ */
 
 #nextBtn{
-
     display:none;
-
     width:100%;
-
     padding:22px;
-
     background:#4255ff;
-
     color:white;
-
     font-size:26px;
-
     font-weight:bold;
-
 }
-
-/* スマホ */
-
-@media(max-width:768px){
-
-.container{
-
-    padding:22px;
-
-}
-
-.title-main{
-
-    font-size:28px;
-
-}
-
-.review-buttons{
-
-    flex-direction:column;
-
-}
-
-textarea{
-
-    min-height:180px;
-
-}
-
-#playBtn,
-#toggleTextBtn,
-#hintBtn{
-
-    font-size:20px;
-
-}
-
-}
-/* テーマ選択へ戻るボタン */
 
 .back-theme-btn{
-
     position:absolute;
-
     top:20px;
     right:20px;
-
     padding:10px 16px;
-
     border:none;
     border-radius:12px;
-
     background:#888;
     color:white;
-
     font-size:14px;
     font-weight:bold;
-
     cursor:pointer;
-
     z-index:1000;
-
     transition:.2s;
-
 }
 
 .back-theme-btn:hover{
-
     transform:translateY(-2px);
-
     background:#666;
-
 }
 
 @media(max-width:768px){
 
-    .back-theme-btn{
+    .container{
+        padding:22px;
+    }
 
+    .title-main{
+        font-size:28px;
+    }
+
+    .review-buttons{
+        flex-direction:column;
+    }
+
+    textarea{
+        min-height:180px;
+    }
+
+    #playBtn,
+    #toggleTextBtn,
+    #hintBtn{
+        font-size:20px;
+    }
+
+    .back-theme-btn{
         top:15px;
         right:15px;
-
         padding:8px 12px;
-
         font-size:12px;
-
     }
 
 }
-</style>
 
+</style>
 </head>
 
-    <body>
+<body>
 
-    <button
-    class="back-theme-btn"
-    onclick="location.href='howto.html'">
-
+<button class="back-theme-btn" onclick="location.href='howto.html'">
     ← テーマ選択へもどる
-
 </button>
+
 <div class="container">
 
     <!-- タイトル -->
     <div class="app-title">
-
         <div class="title-main">
             📝 Summarization
         </div>
@@ -505,7 +305,6 @@ textarea{
         <div class="title-sub">
             要約練習
         </div>
-
     </div>
 
     <div class="logo">
@@ -514,18 +313,14 @@ textarea{
 
     <!-- 問題番号 -->
     <div class="question-info">
-
         <span id="questionNumber">
             Question 1 / 20
         </span>
-
     </div>
 
     <!-- 進捗バー -->
     <div class="progress">
-
         <div id="progressFill" class="progress-fill"></div>
-
     </div>
 
     <!-- 音声 -->
@@ -537,7 +332,7 @@ textarea{
             ▶ 再生
         </button>
 
-       <audio id="audio" preload="auto"></audio>
+        <audio id="audio" preload="auto"></audio>
 
     </div>
 
@@ -545,17 +340,13 @@ textarea{
     <div class="card">
 
         <button id="toggleTextBtn">
-
             👁 テキストを表示
-
         </button>
 
         <div id="textArea" style="display:none;">
 
             <p id="originalText">
-
                 ここに本文が表示されます
-
             </p>
 
         </div>
@@ -568,85 +359,56 @@ textarea{
         <h2>✍️ あなたの要約</h2>
 
         <div id="charCount">
-
             文字数：0文字
-
         </div>
 
         <div id="charGuide">
-
             目安：50〜100文字
-
         </div>
 
         <textarea
-
             id="summaryInput"
-
             rows="8"
-
             placeholder="ここに要約を書いてください"
-
         ></textarea>
 
     </div>
 
- <!-- 要点 -->
-<div class="card">
+    <!-- 要点 -->
+    <div class="card">
 
-    <button id="hintBtn">
-        💡 要点を見る
-    </button>
+        <button id="hintBtn">
+            💡 要点を見る
+        </button>
 
-    <div id="hintArea" style="display:none;">
+        <div id="hintArea" style="display:none;">
 
-        <ul id="pointList">
-        </ul>
+            <ul id="pointList">
+            </ul>
+
+        </div>
 
     </div>
-
-</div>
-
 
     <!-- 自己評価 -->
     <div class="card">
 
         <h2>
-
             📊 自己評価
-
         </h2>
 
         <div class="review-buttons">
 
-            <button
-
-                class="good"
-
-                onclick="rate('good')">
-
+            <button class="good" onclick="rate('good')">
                 🟢 できた
-
             </button>
 
-            <button
-
-                class="normal"
-
-                onclick="rate('normal')">
-
+            <button class="normal" onclick="rate('normal')">
                 🟡 もう少し
-
             </button>
 
-            <button
-
-                class="bad"
-
-                onclick="rate('bad')">
-
+            <button class="bad" onclick="rate('bad')">
                 🔴 がんばる
-
             </button>
 
         </div>
@@ -654,19 +416,11 @@ textarea{
     </div>
 
     <!-- 次へ -->
-
-    <button
-
-        id="nextBtn"
-
-        style="display:none;">
-
+    <button id="nextBtn" style="display:none;">
         ▶ 次の問題
-
     </button>
 
 </div>
-
 <script>
 
 let questions = [];
@@ -693,97 +447,99 @@ async function loadQuestions(){
         const data = await response.json();
 
 
-// ============================
-// 選択されたテーマを取得
-// ============================
+        // ============================
+        // 選択されたテーマを取得
+        // ============================
 
-const savedThemes =
-    JSON.parse(localStorage.getItem("selectedThemes")) || [];
+        const savedThemes =
+            JSON.parse(localStorage.getItem("selectedThemes")) || [];
 
-const selectedThemes =
-    savedThemes.map(theme => String(theme).trim());
-
-
-// ============================
-// 選択されたテーマだけを問題にする
-// ============================
-
-const filteredData = data.filter(row => {
-
-    const themeId =
-        String(row.themeId).trim();
-
-    return selectedThemes.includes(themeId);
-
-});
-
-    if(filteredData.length === 0){
-
-    document.getElementById("questionNumber").textContent =
-        "問題がありません";
-
-    document.getElementById("originalText").textContent =
-        "選択したテーマの問題が見つかりません。";
-
-    return;
-
-}
-// ============================
-// 1行 = 1問として扱う
-// ============================
-
-questions = filteredData.map(row => {
-
-    const points = [];
-
-    if(row.point1){
-        points.push(row.point1);
-    }
-
-    if(row.point2){
-        points.push(row.point2);
-    }
-
-    if(row.point3){
-        points.push(row.point3);
-    }
-
-    if(row.point4){
-        points.push(row.point4);
-    }
-
-    return {
-        themeId: row.themeId,
-        order: row.order,
-        text: row.text,
-        points: points,
-        audio: row.audio
-    };
-
-});
+        const selectedThemes =
+            savedThemes.map(theme => String(theme).trim());
 
 
-// ============================
-// テーマ → 順番の順に並べる
-// ============================
+        // ============================
+        // 選択されたテーマだけを問題にする
+        // ============================
 
-questions.sort((a, b) => {
+        const filteredData = data.filter(row => {
 
-    if(a.themeId !== b.themeId){
+            const themeId =
+                String(row.themeId).trim();
 
-        return a.themeId.localeCompare(b.themeId);
+            return selectedThemes.includes(themeId);
 
-    }
+        });
 
-    return Number(a.order) - Number(b.order);
 
-});
+        if(filteredData.length === 0){
+
+            document.getElementById("questionNumber").textContent =
+                "問題がありません";
+
+            document.getElementById("originalText").textContent =
+                "選択したテーマの問題が見つかりません。";
+
+            return;
+
+        }
+
+
+        // ============================
+        // 1行 = 1問として扱う
+        // ============================
+
+        questions = filteredData.map(row => {
+
+            const points = [];
+
+            if(row.point1){
+                points.push(row.point1);
+            }
+
+            if(row.point2){
+                points.push(row.point2);
+            }
+
+            if(row.point3){
+                points.push(row.point3);
+            }
+
+            if(row.point4){
+                points.push(row.point4);
+            }
+
+            return {
+                themeId: row.themeId,
+                order: row.order,
+                text: row.text,
+                points: points,
+                audio: row.audio
+            };
+
+        });
+
+
+        // ============================
+        // テーマ → 順番の順に並べる
+        // ============================
+
+        questions.sort((a, b) => {
+
+            if(a.themeId !== b.themeId){
+
+                return a.themeId.localeCompare(b.themeId);
+
+            }
+
+            return Number(a.order) - Number(b.order);
+
+        });
 
 
         console.log("読み込んだ問題:", questions);
 
 
-        // 最初の問題を表示
         showQuestion();
 
 
@@ -809,17 +565,14 @@ function showQuestion(){
         return;
     }
 
-
     currentQuestion =
         questions[currentQuestionIndex];
 
 
-    // 問題番号
     document.getElementById("questionNumber").textContent =
         `Question ${currentQuestionIndex + 1} / ${questions.length}`;
 
 
-    // 進捗バー
     const progress =
         ((currentQuestionIndex + 1) / questions.length) * 100;
 
@@ -827,17 +580,9 @@ function showQuestion(){
         progress + "%";
 
 
-  // ============================
-// 本文
-// ============================
+    document.getElementById("originalText").textContent =
+        currentQuestion.text || "";
 
-document.getElementById("originalText").textContent =
-    currentQuestion.text || "";
-
-
-    // ============================
-    // 要点
-    // ============================
 
     const pointList =
         document.getElementById("pointList");
@@ -856,49 +601,39 @@ document.getElementById("originalText").textContent =
     });
 
 
+    const audio =
+        document.getElementById("audio");
 
-// ============================
-// 音声
-// ============================
+    audio.pause();
 
-const audio =
-    document.getElementById("audio");
+    audio.currentTime = 0;
 
-// 前の音声を停止
-audio.pause();
 
-// 音声をリセット
-audio.currentTime = 0;
+    if(currentQuestion.audio){
 
-// 新しい音声を設定
-if(currentQuestion.audio){
+        audio.src =
+            "audio/" + currentQuestion.audio;
 
-    audio.src =
-        "audio/" + currentQuestion.audio;
+        audio.load();
 
-    audio.load();
+    }else{
 
-}else{
+        audio.removeAttribute("src");
 
-    audio.removeAttribute("src");
+    }
 
-}
 
-    // 再生ボタンをリセット
     document.getElementById("playBtn").textContent =
         "▶ 再生";
 
 
-    // 入力欄をリセット
     document.getElementById("summaryInput").value = "";
 
 
-    // 文字数リセット
     document.getElementById("charCount").textContent =
         "文字数：0文字";
 
 
-    // 表示エリアを閉じる
     document.getElementById("textArea").style.display =
         "none";
 
@@ -906,8 +641,6 @@ if(currentQuestion.audio){
         "none";
 
 
-
-    // 次へボタンを隠す
     document.getElementById("nextBtn").style.display =
         "none";
 
@@ -926,8 +659,11 @@ document.getElementById("playBtn").addEventListener(
             document.getElementById("audio");
 
         if(!audio.src){
+
             alert("音声が登録されていません。");
+
             return;
+
         }
 
         audio.play();
@@ -997,8 +733,6 @@ document.getElementById("hintBtn").addEventListener(
     }
 );
 
-
-
 // ============================
 // 文字数カウント
 // ============================
@@ -1018,10 +752,6 @@ document.getElementById("summaryInput").addEventListener(
 
 
 // ============================
-// 起動
-// ============================
-
-// ============================
 // 自己評価
 // ============================
 
@@ -1029,11 +759,11 @@ function rate(result){
 
     console.log("自己評価:", result);
 
-    // 次へボタンを表示
     document.getElementById("nextBtn").style.display =
         "block";
 
 }
+
 
 // ============================
 // 次の問題
@@ -1048,6 +778,7 @@ document.getElementById("nextBtn").addEventListener(
         if(currentQuestionIndex >= questions.length){
 
             alert("🎉 全ての問題が終了しました！");
+
             return;
 
         }
@@ -1056,7 +787,12 @@ document.getElementById("nextBtn").addEventListener(
 
     }
 );
-    
+
+
+// ============================
+// 起動
+// ============================
+
 loadQuestions();
 
 </script>
