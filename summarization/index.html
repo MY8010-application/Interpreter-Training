@@ -37,7 +37,36 @@ body{
     padding:40px;
     position:relative;
 }
+.top-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:10px 16px;
+    border:none;
+    border-radius:12px;
+    background:#888;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
 
+.top-btn:hover{
+    transform:translateY(-2px);
+    background:#666;
+}
+
+@media(max-width:768px){
+
+    .top-btn{
+        top:15px;
+        right:15px;
+        padding:8px 12px;
+        font-size:12px;
+    }
+
+}
 .app-title{
     display:inline-block;
     background:white;
