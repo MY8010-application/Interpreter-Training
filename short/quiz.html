@@ -543,7 +543,14 @@ function showQuestion(){
 document.getElementById("playBtn").addEventListener(
     "click",
     function(){
+
         const audio = document.getElementById("audio");
+
+        /* 念のため音声設定 */
+        if(!audio.src && currentQuestion && currentQuestion.audio){
+            audio.src = "audio/" + currentQuestion.audio;
+            audio.load();
+        }
 
         if(!audio.src){
             alert("音声が登録されていません。");
@@ -557,6 +564,7 @@ document.getElementById("playBtn").addEventListener(
         }
 
         audio.play();
+
         audioPlayed = true;
 
         if(currentLevel === "challenge"){
