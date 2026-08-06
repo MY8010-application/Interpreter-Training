@@ -505,7 +505,7 @@ function showQuestion(){
     audioPlayed = false;
 
     if(currentQuestion.audio){
-        audio.src = "../audio/" + currentQuestion.audio;
+       audio.src = "audio/" + currentQuestion.audio;
         audio.load();
     }else{
         audio.removeAttribute("src");
