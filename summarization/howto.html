@@ -320,27 +320,36 @@ START
 <script>
 function toggleCategory(category){
 
-    const tenrikyo=document.getElementById("tenrikyo");
-    const general=document.getElementById("general");
+    const target=document.getElementById(category);
+    const other=category==="tenrikyo"
+        ? document.getElementById("general")
+        : document.getElementById("tenrikyo");
 
-    const arrowTenrikyo=document.getElementById("arrow-tenrikyo");
-    const arrowGeneral=document.getElementById("arrow-general");
+    const targetArrow=document.getElementById(
+        "arrow-"+category
+    );
 
-    if(category==="tenrikyo"){
+    const otherName=category==="tenrikyo"
+        ? "general"
+        : "tenrikyo";
 
-        tenrikyo.classList.add("open");
-        general.classList.remove("open");
+    const otherArrow=document.getElementById(
+        "arrow-"+otherName
+    );
 
-        arrowTenrikyo.textContent="▼";
-        arrowGeneral.textContent="▶";
+
+    if(target.classList.contains("open")){
+
+        target.classList.remove("open");
+        targetArrow.textContent="▶";
 
     }else{
 
-        general.classList.add("open");
-        tenrikyo.classList.remove("open");
+        target.classList.add("open");
+        targetArrow.textContent="▼";
 
-        arrowGeneral.textContent="▼";
-        arrowTenrikyo.textContent="▶";
+        other.classList.remove("open");
+        otherArrow.textContent="▶";
 
     }
 
