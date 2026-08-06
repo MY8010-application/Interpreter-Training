@@ -194,6 +194,10 @@ body{
         font-size:20px;
         padding:18px;
     }
+    .level-btn.disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+}
 }
 </style>
 </head>
@@ -261,9 +265,9 @@ body{
     <span>音声を何度でも再生できます。</span>
 </button>
 
-<button class="level-btn" onclick="selectLevel('challenge',this)">
-    <strong>チャレンジレベル</strong>
-    <span>音声は1回のみ再生できます。</span>
+<button class="level-btn disabled" disabled>
+    <strong>🔒 チャレンジレベル（準備中）</strong>
+    <span>現在準備中です。</span>
 </button>
 
 </div>
