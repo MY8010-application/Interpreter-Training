@@ -161,35 +161,35 @@ body{
 <h2>📚 テーマを選択</h2>
 <div class="description">
 練習したいテーマを選択してください。<br>
-複数のテーマを選択できます。
+
 </div>
 <div class="theme-options">
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t001">
+<input type="radio" name="theme" value="t001">
 <span>概要</span>
 </label>
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t002">
+<input type="radio" name="theme" value="t002">
 <span>親神様</span>
 </label>
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t003">
+<input type="radio" name="theme" value="t003">
 <span>教祖</span>
 </label>
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t004">
+<input type="radio" name="theme" value="t004">
 <span>ぢば</span>
 </label>
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t005">
+<input type="radio" name="theme" value="t005">
 <span>陽気ぐらし</span>
 </label>
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t006">
+<input type="radio" name="theme" value="t006">
 <span>つとめ</span>
 </label>
 <label class="theme-option">
-<input type="checkbox" name="theme" value="t007">
+<input type="radio" name="theme" value="t007">
 <span>さづけ・ようぼく</span>
 </label>
 </div>
@@ -199,16 +199,17 @@ body{
 </div>
 <script>
 function startTraining(){
-    const selected=document.querySelectorAll('input[name="theme"]:checked');
-    if(selected.length===0){
-        alert("テーマを1つ以上選択してください。");
-        return;
-    }
-    const themes=[];
-    selected.forEach(item=>{
-        themes.push(item.value);
-    });
-    localStorage.setItem("shortSelectedThemes",JSON.stringify(themes));
+    const selected = document.querySelector('input[name="theme"]:checked');
+
+if(!selected){
+    alert("テーマを選択してください。");
+    return;
+}
+
+localStorage.setItem(
+    "shortSelectedThemes",
+    JSON.stringify([selected.value])
+);
     location.href="quiz.html";
 }
 </script>
