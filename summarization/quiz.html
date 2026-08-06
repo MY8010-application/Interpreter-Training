@@ -230,27 +230,14 @@ textarea:focus{
     font-size:26px;
     font-weight:bold;
 }
-
-.back-theme-btn{
-    position:absolute;
-    top:20px;
-    right:20px;
-    padding:10px 16px;
-    border:none;
-    border-radius:12px;
+   .back-btn{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
     background:#888;
     color:white;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
-    z-index:1000;
-    transition:.2s;
-}
-
-.back-theme-btn:hover{
-    transform:translateY(-2px);
-    background:#666;
-}
+    font-size:18px;
+   }
 
 @media(max-width:768px){
 
@@ -276,23 +263,12 @@ textarea:focus{
         font-size:20px;
     }
 
-    .back-theme-btn{
-        top:15px;
-        right:15px;
-        padding:8px 12px;
-        font-size:12px;
-    }
-
 }
 
 </style>
 </head>
 
 <body>
-
-<button class="back-theme-btn" onclick="location.href='howto.html'">
-    ← テーマ選択へもどる
-</button>
 
 <div class="container">
 
@@ -415,12 +391,18 @@ textarea:focus{
 
     </div>
 
-    <!-- 次へ -->
-    <button id="nextBtn" style="display:none;">
-        ▶ 次の問題
-    </button>
+   <!-- 次へ -->
+<button id="nextBtn" style="display:none;">
+    ▶ 次の問題
+</button>
+
+<!-- テーマ選択へ戻る -->
+<button class="back-btn" onclick="location.href='howto.html'">
+    ← テーマ選択へ戻る
+</button>
 
 </div>
+    
 <script>
 
 let questions = [];
