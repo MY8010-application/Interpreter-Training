@@ -574,7 +574,7 @@ function showQuestion(){
     }
 }
 
-/* 音声再生 */
+/* 音声再生・一時停止 */
 document.getElementById("playBtn").addEventListener(
     "click",
     function(){
@@ -592,20 +592,39 @@ document.getElementById("playBtn").addEventListener(
             return;
         }
 
+
         /* チャレンジ */
         if(currentLevel === "challenge" && audioPlayed){
             alert("チャレンジレベルでは、音声は1回のみ再生できます。");
             return;
         }
 
-        audio.play();
 
-        audioPlayed = true;
+        if(audio.paused){
+
+            audio.play();
+
+            document.getElementById("playBtn").textContent =
+                "⏸ 一時停止";
+
+            audioPlayed = true;
+
+
+        }else{
+
+            audio.pause();
+
+            document.getElementById("playBtn").textContent =
+                "▶ 再生";
+
+        }
+
 
         if(currentLevel === "challenge"){
             document.getElementById("playBtn").textContent =
                 "🔒 再生済み";
         }
+
     }
 );
 
