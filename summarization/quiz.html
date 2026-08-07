@@ -336,9 +336,7 @@ textarea:focus{
 
         <h2>🎧 音声</h2>
 
-        <button id="playBtn">
-            ▶ 再生
-        </button>
+        <button id="playBtn">▶ 再生</button>
 
         <audio id="audio" preload="auto"></audio>
 
@@ -477,10 +475,8 @@ async function loadQuestions(){
         // ============================
 
         const filteredData = data.filter(row => {
-
             const themeId =
                 String(row.themeId).trim();
-
             return selectedThemes.includes(themeId);
 
         });
@@ -488,16 +484,12 @@ async function loadQuestions(){
 
         if(filteredData.length === 0){
 
-            document.getElementById("questionNumber").textContent =
-                "問題がありません";
-
-            document.getElementById("originalText").textContent =
-                "選択したテーマの問題が見つかりません。";
+            document.getElementById("questionNumber").textContent = "問題がありません";
+            document.getElementById("originalText").textContent ="選択したテーマの問題が見つかりません。";
 
             return;
 
         }
-
 
         // ============================
         // 1行 = 1問として扱う
@@ -550,9 +542,7 @@ async function loadQuestions(){
 
         });
 
-
         console.log("読み込んだ問題:", questions);
-
 
         showQuestion();
 
@@ -581,7 +571,6 @@ function showQuestion(){
 
     currentQuestion =
         questions[currentQuestionIndex];
-
 
     document.getElementById("questionNumber").textContent =
         `Question ${currentQuestionIndex + 1} / ${questions.length}`;
@@ -637,54 +626,47 @@ function showQuestion(){
     }
 
 
-    document.getElementById("playBtn").textContent =
-        "▶ 再生";
-
-
+    document.getElementById("playBtn").textContent ="▶ 再生";
     document.getElementById("summaryInput").value = "";
-
-
-    document.getElementById("charCount").textContent =
-        "文字数：0文字";
-
-
-    document.getElementById("textArea").style.display =
-        "none";
-
-    document.getElementById("hintArea").style.display =
-        "none";
-
-
-    document.getElementById("nextBtn").style.display =
-        "none";
+    document.getElementById("charCount").textContent ="文字数：0文字";
+    document.getElementById("textArea").style.display ="none";
+    document.getElementById("hintArea").style.display ="none";
+    document.getElementById("nextBtn").style.display ="none";
 
 }
-
 
 // ============================
 // 音声再生
 // ============================
 
-document.getElementById("playBtn").addEventListener(
-    "click",
-    function(){
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
 
-        const audio =
-            document.getElementById("audio");
+playBtn.addEventListener(
+"click",
+function(){
 
-        if(!audio.src){
+    if(!audio.src){
 
-            alert("音声が登録されていません。");
-
-            return;
-
-        }
-
-        audio.play();
+        alert("音声が登録されていません。");
+        return;
 
     }
-);
+    
+    if(audio.paused){
 
+        audio.play();
+        playBtn.textContent = "⏸ 一時停止";
+
+    }else{
+
+        audio.pause();
+        playBtn.textContent = "▶ 再生";
+
+    }
+
+}
+);
 
 // ============================
 // テキスト表示
@@ -696,13 +678,9 @@ document.getElementById("toggleTextBtn").addEventListener(
 
         const area =
             document.getElementById("textArea");
-
         if(area.style.display === "none"){
-
             area.style.display = "block";
-
-            this.textContent =
-                "🙈 テキストを隠す";
+            this.textContent ="🙈 テキストを隠す";
 
         }else{
 
@@ -777,7 +755,6 @@ function rate(result){
         "block";
 
 }
-
 
 // ============================
 // 次の問題
