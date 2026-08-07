@@ -21,9 +21,39 @@ body{
     background:#f7f7f7;
     padding:30px;
     border-radius:15px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    box-shadow:0 0 50px rgba(0,0,0,0.1);
+    position:relative;
+}
+.top-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:10px 16px;
+    border:none;
+    border-radius:12px;
+    background:#888;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
 }
 
+.top-btn:hover{
+    transform:translateY(-2px);
+    background:#666;
+}
+
+@media(max-width:768px){
+
+    .top-btn{
+        top:15px;
+        right:15px;
+        padding:8px 12px;
+        font-size:12px;
+    }
+
+}
 .app-title{
     display:inline-block;
     background:white;
@@ -186,6 +216,10 @@ h2{
 <body>
 
 <div class="container">
+
+<button class="top-btn" onclick="location.href='../index.html'">
+← トップへ
+</button>
     
 <div class="top-bar">
 
