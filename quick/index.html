@@ -22,14 +22,44 @@ body{
 }
 
 .container{
-    max-width:900px;
-    margin:auto;
-    margin-top:30px;
+    max-width:700px;
+    margin:40px auto;
     background:#e9e9e9;
-    padding:40px;
     border-radius:24px;
+    padding:40px;
+    position:relative;
+}
+    
+.top-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:10px 16px;
+    border:none;
+    border-radius:12px;
+    background:#888;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
 }
 
+.top-btn:hover{
+    transform:translateY(-2px);
+    background:#666;
+}
+
+@media(max-width:768px){
+
+    .top-btn{
+        top:15px;
+        right:15px;
+        padding:8px 12px;
+        font-size:12px;
+    }
+
+}
 .logo{
     color:#4255ff;
     font-weight:bold;
@@ -195,6 +225,10 @@ h1{
 <body>
 
 <div class="container">
+
+<button class="top-btn" onclick="location.href='../index.html'">
+← トップへ
+</button>
     
 <div class="app-title">
     <div class="title-main">天理教用語</div>
