@@ -235,18 +235,41 @@ body{
 </div>
 <script>
 function startTraining(){
-    const selected = document.querySelector('input[name="theme"]:checked');
 
-if(!selected){
-    alert("テーマを選択してください。");
-    return;
-}
+    const selected =
+        document.querySelector('input[name="theme"]:checked');
 
-localStorage.setItem(
-    "shortSelectedThemes",
-    JSON.stringify([selected.value])
-);
-    location.href="quiz.html";
+    if(!selected){
+        alert("テーマを選択してください。");
+        return;
+    }
+
+    let themeId = selected.value;
+
+    const level =
+        localStorage.getItem("shortLevel") || "normal";
+
+    if(level === "challenge"){
+
+        const challengeThemeMap = {
+            t002:"c001",
+            t003:"c002",
+            t004:"c003",
+            t005:"c004",
+            t006:"c005",
+            t007:"c006"
+        };
+
+        themeId =
+            challengeThemeMap[selected.value] || selected.value;
+    }
+
+    localStorage.setItem(
+        "shortSelectedThemes",
+        JSON.stringify([themeId])
+    );
+
+    location.href = "quiz.html";
 }
 </script>
 </body>
