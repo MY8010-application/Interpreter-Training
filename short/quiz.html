@@ -323,7 +323,6 @@ body{
 
 <body>
 <div class="container">
-
 <button class="top-btn" onclick="location.href='../index.html'">
 ← トップへ
 </button>
@@ -394,11 +393,9 @@ body{
             <button class="good" onclick="finishReview('good')">
                 🟢 できた
             </button>
-
             <button class="normal" onclick="finishReview('normal')">
                 🟡 もう少し
             </button>
-
             <button class="bad" onclick="finishReview('bad')">
                 🔴 がんばる
             </button>
@@ -561,7 +558,7 @@ function showQuestion(){
 
     if(currentLevel === "challenge"){
         challengeMessage.textContent =
-            "🔥 チャレンジ：音声は1回のみ再生できます。";
+            "チャレンジ：音声は1回のみ再生できます。";
     }else{
         challengeMessage.textContent =
             "ノーマル：音声を何度でも再生できます。";
