@@ -434,6 +434,14 @@ const themeNames = {
     t005:"ぢば",
     t006:"つとめ",
     t007:"さづけ・ようぼく"
+
+    c001:"親神様",
+    c002:"教祖",
+    c003:"陽気ぐらし",
+    c004:"ぢば",
+    c005:"つとめ",
+    c006:"さづけ",
+    c007:"ようぼく"
 };
 
 /* GASからデータ取得 */
@@ -465,9 +473,10 @@ async function loadQuestions(){
         }
 
         /* 選択テーマだけ取得 */
-        questions = data.filter(row =>
-            selectedThemes.includes(row.themeId)
-        );
+      questions = data.filter(row =>
+    selectedThemes.includes(row.themeId) &&
+    row.level === currentLevel
+);
 
         /* テーマ順・問題順 */
         questions.sort((a,b) => {
