@@ -471,8 +471,8 @@ function startTimer(){
     timerInterval = setInterval(function(){
         timeLeft--;
         document.getElementById("timerText").textContent = timeLeft;
-        document.getElementById("timerFill").style.width =
-    (timeLeft / 30 * 100) + "%";
+       document.getElementById("timerFill").style.width =
+    (timeLeft / (currentLevel === "challenge" ? 60 : 30) * 100) + "%";
        if(timeLeft <= 0){
     timeUp = true;       
     clearInterval(timerInterval);
@@ -497,11 +497,17 @@ function resetTimer(){
         clearInterval(timerInterval);
         timerInterval = null;
     }
-    timeLeft = 30;
+
+    const maxTime = currentLevel === "challenge" ? 60 : 30;
+
+    timeLeft = maxTime;
     timeUp = false;
+
     const timer = document.getElementById("timer");
-    document.getElementById("timerText").textContent = "30";
+
+    document.getElementById("timerText").textContent = maxTime;
     document.getElementById("timerFill").style.width = "100%";
+
     timer.classList.remove("time-up");
 }
     
