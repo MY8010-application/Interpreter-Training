@@ -161,20 +161,14 @@ h2{
 
     background:#4255ff;
     color:white;
-
     border:none;
     border-radius:18px;
-
     box-shadow:
     0 4px 10px rgba(0,0,0,0.15);
-
     padding:12px 24px;
-
     font-size:16px;
     font-weight:bold;
-
     cursor:pointer;
-
     transition:all 0.2s ease;
 }
 
@@ -182,7 +176,6 @@ h2{
 .back-btn:hover{
 
     transform:translateY(-2px);
-
     box-shadow:
     0 6px 15px rgba(66,85,255,0.3);
 
@@ -221,11 +214,13 @@ h2{
         margin-bottom:20px;
     }
 
-    .top-bar .back-btn{
-        position:static;
-        transform:none;
-        align-self:flex-start;
-    }
+   .top-bar .back-btn{
+    position:static;
+    transform:none;
+    align-self:flex-start;
+    padding:6px 12px;
+    font-size:12px;
+}
 
    .top-bar .app-title{
     position:static;
@@ -271,8 +266,7 @@ h2{
 <div class="course-grid">
 
 <button class="course-btn selected" onclick="selectCourse(50,this)">
-🌱<br>
-Warm-up<br>
+<br>Warm-up<br>
 <small>50 Questions</small>
 </button>
 
@@ -283,21 +277,18 @@ Basic<br>
 </button>
 
 <button class="course-btn" onclick="selectCourse(150,this)">
-💪<br>
-Standard<br>
+<br>Standard<br>
 <small>150 Questions</small>
 </button>
 
 <button class="course-btn" onclick="selectCourse(200,this)">
-🔥<br>
-Challenge<br>
+<br>Challenge<br>
 <small>200 Questions</small>
     
 </button>
 
 <button class="course-btn" onclick="selectCourse(350,this)">
-👑<br>
-Master<br>
+<br>Master<br>
 <small>350 Questions</small>
 </button>
 
