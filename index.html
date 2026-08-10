@@ -96,6 +96,16 @@ footer{
     color:#333;
     display:block;
 }
+.card h2 span{
+font-size:16px;
+font-weight:normal;
+}
+
+@media(max-width:768px){
+    .card h2 span{
+    font-size:12px;
+    }
+}
 </style>
 </head>
 
@@ -113,34 +123,21 @@ footer{
 <div class="card quick"
 onclick="location.href='quick/index.html'">
 
-<h2>📘 Quick Response</h2>
-
-<p>
-Instant vocabulary interpretation training.
-</p>
-
+<h2>Quick Response</h2>
 
 </div>
 
 <div class="card summary"
 onclick="location.href='summarization/index.html'">
 
-<h2>📝 Summarization（要約練習）</h2>
-
-<p>
-Summarize what you hear.
-</p>
+<h2>Summarization<span>（要約練習）</span></h2>
 
 </div>
 
 
 <a href="short/index.html" class="card interpretation">
 
-<h2>🎤 Short Interpretation（短文通訳練習）</h2>
-
-<p>
-Interpret sentence by sentence.<br>
-</p>
+<h2>🎤 Short Interpretation<span>（短文通訳練習）</span></h2>
 
 </a>
     
