@@ -151,6 +151,17 @@ Interpret sentence by sentence.<br>
 © MY
 
 </footer>
+    <!-- ここまで既存のHTML -->
 
+    <script>
+    if("serviceWorker" in navigator){
+        window.addEventListener("load",()=>{
+            navigator.serviceWorker.register("service-worker.js");
+        });
+    }
+    </script>
+
+</body>
+</html>
 </body>
 </html>
