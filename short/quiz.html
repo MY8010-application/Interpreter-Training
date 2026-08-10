@@ -437,7 +437,49 @@ let currentThemeIndex = 0;
 let currentThemeQuestions = [];
 let currentLevel = "normal";
 let audioPlayed = false;
+let timerInterval = null;
+let timeLeft = 30;
 
+// ============================
+// タイマー
+// ============================
+
+function startTimer(){
+    if(timerInterval){
+        return;
+    }
+    timerInterval = setInterval(function(){
+        timeLeft--;
+        document.getElementById("timer").textContent = timeLeft;
+       if(timeLeft <= 0){
+    clearInterval(timerInterval);
+    timerInterval = null;
+    document.getElementById("timer").textContent = "Time up";
+    document.getElementById("timer").classList.add("time-up");
+    document.getElementById("audio").pause();
+    document.getElementById("playBtn").textContent = "▶ 再生";
+}
+    },1000);
+}
+
+function pauseTimer(){
+    if(timerInterval){
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+function resetTimer(){
+    if(timerInterval){
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    timeLeft = 30;
+    const timer = document.getElementById("timer");
+    timer.textContent = "30";
+    timer.classList.remove("time-up");
+}
+    
 /* テーマ名 */
 const themeNames = {
     t001:"概要",
@@ -555,6 +597,8 @@ function showQuestion(){
         progress + "%";
 
     /* 音声 */
+    resetTimer();
+    
     const audio = document.getElementById("audio");
 
     audio.pause();
@@ -622,24 +666,16 @@ document.getElementById("playBtn").addEventListener(
         }
 
 
-        if(audio.paused){
-
-            audio.play();
-
-            document.getElementById("playBtn").textContent =
-                "⏸ 一時停止";
-
-            audioPlayed = true;
-
-
-        }else{
-
-            audio.pause();
-
-            document.getElementById("playBtn").textContent =
-                "▶ 再生";
-
-        }
+      if(audio.paused){
+    audio.play();
+    document.getElementById("playBtn").textContent = "⏸ 一時停止";
+    audioPlayed = true;
+    startTimer();
+}else{
+    audio.pause();
+    document.getElementById("playBtn").textContent = "▶ 再生";
+    pauseTimer();
+}
 
     }
 );
