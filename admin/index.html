@@ -425,7 +425,7 @@ body{
 // ============================
 
 const GAS_URL =
-    "ここに管理者用GASのURL";
+    "https://script.google.com/macros/s/AKfycbxHHbkhTkYuUj6nmbIQMu0o-e4u4669nMrAU3p9fATmTk4K_KD2dzL3LtFhbl9Twxj1/exec";
 
 
 // ============================
@@ -436,15 +436,13 @@ async function loadAccessData(){
 
     try{
 
-        const response =
-            await fetch(GAS_URL);
-
+const response =
+    await fetch(GAS_URL + "?action=stats");
         if(!response.ok){
 
             throw new Error(
                 "データ取得に失敗しました"
             );
-
         }
 
         const data =
@@ -516,18 +514,13 @@ async function loadAccessData(){
                     </span>
 
                 `;
-
-
                 accessList.appendChild(row);
-
             });
 
         }else{
 
             accessList.innerHTML = `
-
                 <div class="access-row">
-
                     <span class="access-date">
                         データがありません
                     </span>
@@ -535,7 +528,6 @@ async function loadAccessData(){
                     <span class="access-count">
                         0回
                     </span>
-
                 </div>
 
             `;
