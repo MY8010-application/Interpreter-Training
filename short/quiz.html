@@ -439,7 +439,8 @@ let currentLevel = "normal";
 let audioPlayed = false;
 let timerInterval = null;
 let timeLeft = 30;
-
+let timeUp = false;
+    
 // ============================
 // タイマー
 // ============================
@@ -452,6 +453,7 @@ function startTimer(){
         timeLeft--;
         document.getElementById("timer").textContent = timeLeft;
        if(timeLeft <= 0){
+    timeUp = true;       
     clearInterval(timerInterval);
     timerInterval = null;
     document.getElementById("timer").textContent = "Time up";
@@ -475,6 +477,7 @@ function resetTimer(){
         timerInterval = null;
     }
     timeLeft = 30;
+    timeUp = false;
     const timer = document.getElementById("timer");
     timer.textContent = "30";
     timer.classList.remove("time-up");
@@ -646,7 +649,10 @@ document.getElementById("playBtn").addEventListener(
     function(){
 
         const audio = document.getElementById("audio");
-
+        if(timeUp){
+            return;
+        }
+        
         /* 念のため音声設定 */
         if(!audio.src && currentQuestion && currentQuestion.audio){
             audio.src = "audio/" + currentQuestion.audio;
