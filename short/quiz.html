@@ -119,7 +119,19 @@ body{
     background:#4255ff;
     transition:.3s;
 }
+    
+/* タイマー */
+.timer{
+    margin:20px 0;
+    font-size:32px;
+    font-weight:800;
+    color:#4255ff;
+}
 
+.timer.time-up{
+    color:#F44336;
+}
+    
 /* カード */
 .card{
     background:white;
@@ -347,19 +359,23 @@ body{
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
-    <div class="card">
-        <h2>🎧 音声を聞いて通訳してください</h2>
+   <div class="card">
+    <h2>🎧 音声を聞いて通訳してください</h2>
 
-        <audio id="audio"></audio>
+    <audio id="audio"></audio>
 
-        <button id="playBtn">▶ 再生</button>
+    <button id="playBtn">▶ 再生</button>
 
-        <div class="challenge-message" id="challengeMessage"></div>
-
-        <button class="complete-btn" id="completeBtn">
-            次へ →
-        </button>
+    <div class="timer" id="timer">
+        30
     </div>
+
+    <div class="challenge-message" id="challengeMessage"></div>
+
+    <button class="complete-btn" id="completeBtn">
+        次へ →
+    </button>
+</div>
 </div>
 
 <!-- テーマ終了・振り返り -->
