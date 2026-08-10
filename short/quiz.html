@@ -168,11 +168,7 @@ body{
     transform:translateY(1px);
 }
 
-.challenge-message{
-    margin-top:12px;
-    color:#666;
-    font-size:14px;
-}
+
 
 /* 次へ・評価ボタン */
 .complete-btn{
@@ -360,7 +356,7 @@ body{
     </div>
 
    <div class="card">
-    <h2>🎧 音声を聞いて通訳してください</h2>
+    <h2>🎧 音声を聞いて時間内に通訳してください</h2>
 
     <audio id="audio"></audio>
 
@@ -369,8 +365,6 @@ body{
     <div class="timer" id="timer">
         30
     </div>
-
-    <div class="challenge-message" id="challengeMessage"></div>
 
     <button class="complete-btn" id="completeBtn">
         次へ →
@@ -615,18 +609,7 @@ function showQuestion(){
         audio.removeAttribute("src");
     }
 
-    /* チャレンジ表示 */
-    const challengeMessage =
-        document.getElementById("challengeMessage");
-
-    if(currentLevel === "challenge"){
-        challengeMessage.textContent =
-            "チャレンジ：音声は1回のみ再生できます。";
-    }else{
-        challengeMessage.textContent =
-            "ノーマル：音声を何度でも再生できます。";
-    }
-
+  
     /* ボタン */
     document.getElementById("playBtn").textContent = "▶ 再生";
 
