@@ -209,27 +209,32 @@ h2{
 .top-bar .app-title{
     margin-bottom:0;
 }
-@media(max-width:768px){
-    .app-title{
-        font-size:28px;
-        padding:14px 24px;
-    }
 
+@media(max-width:768px){
     .top-bar{
-        height:120px;
+        height:auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+        margin-bottom:20px;
     }
 
     .top-bar .back-btn{
-        top:0;
+        position:static;
         transform:none;
+        align-self:flex-start;
     }
 
     .top-bar .app-title{
-        top:auto;
-        bottom:0;
-        transform:translateX(-50%);
+        position:static;
+        transform:none;
+        margin-bottom:0;
+        font-size:28px;
+        padding:14px 24px;
     }
 }
+    
 </style>
 </head>
 
