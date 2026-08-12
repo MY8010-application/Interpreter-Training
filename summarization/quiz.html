@@ -297,6 +297,10 @@ textarea:focus{
     #hintBtn{
         font-size:20px;
     }
+    #playBtn:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+}
 }
 
 </style>
@@ -443,13 +447,19 @@ textarea:focus{
 let questions = [];
 let currentQuestionIndex = 0;
 let currentQuestion = null;
-
+let isLoading = true;
 
 // ============================
 // GASからデータ取得
 // ============================
 
 async function loadQuestions(){
+
+    isLoading = true;
+
+    document.getElementById("questionNumber").textContent = "Question 0 / 0";
+    document.getElementById("playBtn").textContent = "読み込み中…";
+    document.getElementById("playBtn").disabled = true;
 
     try{
 
@@ -547,19 +557,29 @@ async function loadQuestions(){
 
         });
 
-        console.log("読み込んだ問題:", questions);
+      console.log("読み込んだ問題:", questions);
 
-        showQuestion();
+isLoading = false;
 
+document.getElementById("playBtn").disabled = false;
 
-    }catch(error){
+showQuestion();
 
-        console.error(error);
+   }catch(error){
 
-        document.getElementById("originalText").textContent =
-            "問題データを読み込めませんでした。";
+    console.error(error);
 
-    }
+    isLoading = false;
+
+    document.getElementById("playBtn").disabled = false;
+    document.getElementById("playBtn").textContent = "▶ 再生";
+
+    document.getElementById("questionNumber").textContent = "Question 0 / 0";
+
+    document.getElementById("originalText").textContent =
+        "問題データを読み込めませんでした。";
+
+}
 
 }
 
@@ -650,6 +670,10 @@ const playBtn = document.getElementById("playBtn");
 playBtn.addEventListener(
 "click",
 function(){
+
+    if(isLoading){
+        return;
+    }
 
     if(!audio.src){
 
