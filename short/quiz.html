@@ -349,6 +349,45 @@ body{
     #playBtn:disabled{
     opacity:0.6;
     cursor:not-allowed;
+    }
+    .quiz-back-buttons{
+    position:absolute;
+    top:20px;
+    left:20px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.quiz-back-buttons button{
+    padding:8px 12px;
+    border:none;
+    border-radius:10px;
+    background:#888;
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.quiz-back-buttons button:hover{
+    background:#666;
+}
+
+@media(max-width:768px){
+
+    .quiz-back-buttons{
+        top:12px;
+        left:12px;
+        gap:5px;
+    }
+
+    .quiz-back-buttons button{
+        padding:6px 9px;
+        font-size:11px;
+        border-radius:8px;
+    }
+
 }
 }
 </style>
@@ -356,6 +395,12 @@ body{
 
 <body>
 <div class="container">
+
+    <div class="quiz-back-buttons">
+    <button id="backThemeBtn">テーマ選択へ戻る</button>
+    <button id="backLevelBtn">レベル選択へ戻る</button>
+</div>
+    
 <button class="top-btn" onclick="location.href='../index.html'">
 ← トップへ
 </button>
@@ -810,7 +855,19 @@ document.getElementById("nextThemeBtn").addEventListener(
         }
     }
 );
+document.getElementById("backThemeBtn").addEventListener(
+    "click",
+    function(){
+        location.href = "index.html";
+    }
+);
 
+document.getElementById("backLevelBtn").addEventListener(
+    "click",
+    function(){
+        location.href = "howto.html";
+    }
+);
 /* 起動 */
 loadQuestions();
 </script>
