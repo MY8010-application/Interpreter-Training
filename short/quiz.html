@@ -188,8 +188,10 @@ body{
 #playBtn:active{
     transform:translateY(1px);
 }
-
-
+ #playBtn:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+    }
 
 /* 次へ・評価ボタン */
 .complete-btn{
@@ -324,32 +326,6 @@ body{
     border-radius:18px;
     cursor:pointer;
 }
-
-/* スマホ */
-@media(max-width:768px){
-    .container{
-        padding:22px;
-    }
-
-    .title-main{
-        font-size:28px;
-    }
-
-    .review-buttons{
-        flex-direction:column;
-    }
-
-    #playBtn{
-        font-size:20px;
-    }
-
-    .complete-btn{
-        font-size:20px;
-    }
-    #playBtn:disabled{
-    opacity:0.6;
-    cursor:not-allowed;
-    }
 .quiz-back-buttons{
     position:absolute;
     top:20px;
@@ -357,7 +333,6 @@ body{
     display:flex;
     gap:8px;
 }
-
 .quiz-back-buttons button{
     padding:9px 14px;
     border:none;
@@ -380,23 +355,42 @@ body{
     transform:translateY(1px);
 }
 
+/* スマホ */
 @media(max-width:768px){
-
+    .container{
+        padding:22px;
+    }
+    
     .quiz-back-buttons{
-        top:12px;
-        left:12px;
-        flex-direction:column;
-        gap:5px;
-    }
-
-    .quiz-back-buttons button{
-        padding:6px 9px;
-        font-size:11px;
-        border-radius:8px;
-    }
-
+    top:12px;
+    left:12px;
+    flex-direction:column;
+    gap:5px;
 }
 
+.quiz-back-buttons button{
+    padding:6px 9px;
+    font-size:11px;
+    border-radius:8px;
+}
+    .title-main{
+        font-size:28px;
+    }
+
+    .review-buttons{
+        flex-direction:column;
+    }
+
+    #playBtn{
+        font-size:20px;
+    }
+
+    .complete-btn{
+        font-size:20px;
+    }
+   
+
+   
 }
 </style>
 </head>
@@ -513,7 +507,7 @@ let selectedThemes = [];
 let currentThemeIndex = 0;
 let currentThemeQuestions = [];
 let currentLevel = "normal";
-let audioPlayed = false;
+let audioEnded = false;
 let timerInterval = null;
 let timeLeft = 30;
 let timeUp = false;
@@ -539,6 +533,7 @@ function startTimer(){
     document.getElementById("timer").classList.add("time-up");
     document.getElementById("audio").pause();
     document.getElementById("playBtn").textContent = "▶ 再生";
+    document.getElementById("playBtn").disabled = true;
 }
     },1000);
 }
@@ -710,7 +705,7 @@ function showQuestion(){
 
     audio.pause();
     audio.currentTime = 0;
-    audioPlayed = false;
+    audioEnded = false;
 
     if(currentQuestion.audio){
        audio.src = "audio/" + currentQuestion.audio;
@@ -721,6 +716,7 @@ function showQuestion(){
 
     /* ボタン */
     document.getElementById("playBtn").textContent = "▶ 再生";
+    document.getElementById("playBtn").disabled = false;
 
     const completeBtn =
         document.getElementById("completeBtn");
@@ -736,10 +732,19 @@ function showQuestion(){
 }
 
 /* 音声再生・一時停止 */
+const audio = document.getElementById("audio");
+
+audio.addEventListener("ended", function(){
+    audioEnded = true;
+    document.getElementById("playBtn").disabled = true;
+    document.getElementById("playBtn").textContent = "▶ 再生";
+});
+    
 document.getElementById("playBtn").addEventListener(
     "click",
 function(){
 
+    
     if(isLoading){
         return;
     }
@@ -761,19 +766,24 @@ function(){
         }
 
 
-        /* チャレンジ */
-        if(currentLevel === "challenge" && audioPlayed){
-            alert("チャレンジレベルでは、音声は1回のみ再生できます。");
-            return;
-        }
-
-
-      if(audio.paused){
-    audio.play();
-    document.getElementById("playBtn").textContent = "⏸ 一時停止";
-    audioPlayed = true;
-    startTimer();
+    if(audio.paused){
+    
+        
+    audio.play()
+        .then(function(){
+            document.getElementById("playBtn").textContent = "⏸ 一時停止";
+            startTimer();
+        })
+        .catch(function(error){
+            console.error(error);
+            alert("音声を再生できませんでした。");
+        });
 }else{
+    audio.pause();
+    document.getElementById("playBtn").textContent = "▶ 再生";
+    pauseTimer();
+}
+      else{
     audio.pause();
     document.getElementById("playBtn").textContent = "▶ 再生";
     pauseTimer();
@@ -837,17 +847,6 @@ function showThemeReview(){
 /* 自己評価 */
 function finishReview(result){
     localStorage.setItem("shortLastReview", result);
-
-    /* 次のテーマがある場合 */
-    if(currentThemeIndex < selectedThemes.length - 1){
-        currentThemeIndex++;
-
-        document.getElementById("nextThemeBtn").style.display =
-            "block";
-    }else{
-        alert("🎉 すべてのテーマの練習が終了しました！");
-        location.href = "howto.html";
-    }
 }
 
 /* 次のテーマ */
