@@ -778,17 +778,13 @@ function(){
             console.error(error);
             alert("音声を再生できませんでした。");
         });
-}else{
+}
+    else{
     audio.pause();
     document.getElementById("playBtn").textContent = "▶ 再生";
     pauseTimer();
 }
-      else{
-    audio.pause();
-    document.getElementById("playBtn").textContent = "▶ 再生";
-    pauseTimer();
-}
-
+   
     }
 );
 
