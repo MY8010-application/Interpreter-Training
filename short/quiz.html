@@ -346,6 +346,10 @@ body{
     .complete-btn{
         font-size:20px;
     }
+    #playBtn:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+}
 }
 </style>
 </head>
@@ -451,6 +455,7 @@ body{
 let questions = [];
 let currentQuestionIndex = 0;
 let currentQuestion = null;
+let isLoading = true;
 let selectedThemes = [];
 let currentThemeIndex = 0;
 let currentThemeQuestions = [];
@@ -532,6 +537,13 @@ const themeNames = {
 
 /* GASからデータ取得 */
 async function loadQuestions(){
+
+    isLoading = true;
+
+    document.getElementById("questionNumber").textContent = "Question 0 / 0";
+    document.getElementById("playBtn").textContent = "読み込み中…";
+    document.getElementById("playBtn").disabled = true;
+
     try{
         const response = await fetch(
             "https://script.google.com/macros/s/AKfycbw2Jjm7cU9hB-dJFYqe-L0eoA_7Ip3OYs0j7gRE0Yio8W7GwI3qQ3ojxoFnQJWGjSjc/exec"
@@ -576,15 +588,26 @@ async function loadQuestions(){
             return Number(a.order) - Number(b.order);
         });
 
-        /* 最初のテーマ開始 */
-        startTheme();
+       /* 読み込み完了 */
+isLoading = false;
 
-    }catch(error){
-        console.error(error);
+document.getElementById("playBtn").disabled = false;
 
-        document.getElementById("questionArea").innerHTML =
-            "問題データを読み込めませんでした。";
-    }
+/* 最初のテーマ開始 */
+startTheme();
+
+   }catch(error){
+    console.error(error);
+
+    isLoading = false;
+
+    document.getElementById("playBtn").disabled = false;
+    document.getElementById("playBtn").textContent = "▶ 再生";
+    document.getElementById("questionNumber").textContent = "Question 0 / 0";
+
+    document.getElementById("questionArea").innerHTML =
+        "問題データを読み込めませんでした。";
+}
 }
 
 /* テーマ開始 */
@@ -662,9 +685,13 @@ function showQuestion(){
 /* 音声再生・一時停止 */
 document.getElementById("playBtn").addEventListener(
     "click",
-    function(){
+function(){
 
-        const audio = document.getElementById("audio");
+    if(isLoading){
+        return;
+    }
+
+    const audio = document.getElementById("audio");
         if(timeUp){
             return;
         }
