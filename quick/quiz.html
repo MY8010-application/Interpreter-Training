@@ -536,38 +536,19 @@ if(saved){
 async function loadJSON() {
     try {
 
-const category = localStorage.getItem("category");
-const language = localStorage.getItem("language");
+       const category = localStorage.getItem("category");
 
-if(!category || !language){
-    throw new Error("カテゴリーまたは言語が選択されていません");
-}
 const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec?mode=data&category=" 
-    + encodeURIComponent(category)
-    + "&language="
-    + encodeURIComponent(language)
+    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec"
 );
 
 if(!response.ok){
     throw new Error("データ取得失敗");
 }
 
-const data = await response.json();
+const allWords = await response.json();
 
-if(data.error){
-    throw new Error(data.error);
-}
-
-if(!Array.isArray(data)){
-    throw new Error("GASから問題データを取得できませんでした");
-}
-
-if(data.length === 0){
-    throw new Error("選択したカテゴリー・言語のデータがありません");
-}
-
-words = data;
+words = allWords[category];
 
 // 選択した問題数を取得
 const questionCount = Number(localStorage.getItem("questionCount")) || 50;
@@ -725,8 +706,47 @@ document.getElementById("question").classList.add("fade-in");
 document.getElementById("answer").style.display = "none";
 document.getElementById("showAnswerBtn").style.display = "inline-block";
 
- document.getElementById("answer").textContent =
-    word.answer || "翻訳データがありません";
+   switch(lang){
+
+    case "en":
+        document.getElementById("answer").textContent = word.en;
+        break;
+
+    case "zh":
+        document.getElementById("answer").textContent = word.zh;
+        break;
+
+    case "ko":
+        document.getElementById("answer").textContent = word.ko;
+        break;
+
+    case "pt":
+        document.getElementById("answer").textContent = word.pt;
+        break;
+
+    case "fr":
+        document.getElementById("answer").textContent = word.fr;
+        break;
+
+    case "mn":
+        document.getElementById("answer").textContent = word.mn;
+        break;
+
+    case "vi":
+        document.getElementById("answer").textContent = word.vi;
+        break;
+
+    case "de":
+        document.getElementById("answer").textContent = word.de;
+        break;
+
+    case "km":
+        document.getElementById("answer").textContent = word.km;
+        break;
+
+    default:
+        document.getElementById("answer").textContent = "翻訳データがありません";
+}
 
     startTimer();
 }
