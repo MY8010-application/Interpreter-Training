@@ -391,19 +391,24 @@ button{
     font-size:14px;
     border-radius:10px;
 }
- /* 評価ボタン */
+ /* スマホ評価ボタン */
+/* 評価ボタン */
 #reviewButtons{
     display:flex;
     justify-content:center;
-    gap:6px;
+    align-items:center;
+    gap:4px;
+    flex-wrap:nowrap;
 }
 
 #reviewButtons button{
+    width:auto;
     flex:1;
-    max-width:105px;
-    font-size:13px;
-    padding:7px 4px;
-    margin:3px;
+    min-width:0;
+    margin:2px;
+    padding:7px 2px;
+    font-size:12px;
+    white-space:nowrap;
     border-radius:999px;
 }
 }
