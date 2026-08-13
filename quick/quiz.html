@@ -556,6 +556,14 @@ if(data.error){
     throw new Error(data.error);
 }
 
+if(!Array.isArray(data)){
+    throw new Error("GASから問題データを取得できませんでした");
+}
+
+if(data.length === 0){
+    throw new Error("選択したカテゴリー・言語のデータがありません");
+}
+
 words = data;
 
 // 選択した問題数を取得
