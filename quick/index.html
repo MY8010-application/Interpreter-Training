@@ -409,10 +409,10 @@ onclick="selectLanguage('All','km')">
 async function checkLanguages(){
 
     const categories = [
-        "Vocabulary",
-        "Expression",
-        "All"
-    ];
+    "Vocabulary",
+    "Expression",
+    "All"
+];
 
     const languages = [
         "en",
@@ -426,43 +426,50 @@ async function checkLanguages(){
         "km"
     ];
 
+
     const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec?mode=languages"
+    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec"
     );
 
-    const availableLanguages = await response.json();
 
-    categories.forEach(category => {
+    const allWords = await response.json();
 
-        const categoryData =
-            availableLanguages[category] || {};
 
-        languages.forEach(lang => {
+    categories.forEach(category=>{
+
+        const words = allWords[category];
+
+
+        languages.forEach(lang=>{
 
             const button =
-                document.getElementById(category + "-" + lang);
+            document.getElementById(category+"-"+lang);
+
 
             if(!button) return;
 
+
             const available =
-                categoryData[lang];
+words.some(word=>word[lang]);
 
-            button.classList.add("show");
 
-            if(!available){
+button.classList.add("show");
 
-                button.classList.add("disabled");
 
-                button.innerHTML =
-                    button.innerHTML + "<br>準備中";
+if(!available){
 
-                button.onclick = null;
+    button.classList.add("disabled");
 
-            }
+    button.innerHTML =
+    button.innerHTML + "<br>準備中";
+
+    button.onclick=null;
+
+}
 
         });
 
-    });
+        });
 
 }
 
