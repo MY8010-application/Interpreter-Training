@@ -539,6 +539,9 @@ async function loadJSON() {
 const category = localStorage.getItem("category");
 const language = localStorage.getItem("language");
 
+if(!category || !language){
+    throw new Error("カテゴリーまたは言語が選択されていません");
+}
 const response = await fetch(
     "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec?mode=data&category=" 
     + encodeURIComponent(category)
