@@ -348,13 +348,15 @@ button{
     padding:10px 16px;
     margin-bottom:10px;
 }
+/*スマタイトル*/
 .app-title .title-main{
     font-size:18px !important;
 }
-
+/*スマホサブタイトル*/
 .app-title .title-sub{
     font-size:12px !important;
 }
+/*スマホ問題*/
 #question{
     display:block;
     width:calc(100% - 20px);
@@ -376,7 +378,7 @@ button{
     align-items:center;
     justify-content:center;
 }
-
+/*スマホダークモードボタン*/
     #darkModeBtn{
         width: 32px;
         height: 32px;
@@ -389,12 +391,21 @@ button{
     font-size:14px;
     border-radius:10px;
 }
- /*評価ボタン*/ 
-    #reviewButtons button{
-        font-size: 14px;
-        padding: 6px 10px;
-        border-radius:999px;
-    }
+ /* 評価ボタン */
+#reviewButtons{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+}
+
+#reviewButtons button{
+    flex:1;
+    max-width:105px;
+    font-size:13px;
+    padding:7px 4px;
+    margin:3px;
+    border-radius:999px;
+}
 }
     
 </style>
