@@ -536,19 +536,27 @@ if(saved){
 async function loadJSON() {
     try {
 
-       const category = localStorage.getItem("category");
+const category = localStorage.getItem("category");
+const language = localStorage.getItem("language");
 
 const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec"
+    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec?mode=data&category=" 
+    + encodeURIComponent(category)
+    + "&language="
+    + encodeURIComponent(language)
 );
 
 if(!response.ok){
     throw new Error("データ取得失敗");
 }
 
-const allWords = await response.json();
+const data = await response.json();
 
-words = allWords[category];
+if(data.error){
+    throw new Error(data.error);
+}
+
+words = data;
 
 // 選択した問題数を取得
 const questionCount = Number(localStorage.getItem("questionCount")) || 50;
