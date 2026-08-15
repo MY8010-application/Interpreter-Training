@@ -209,6 +209,37 @@ body{
 .update-btn:active{
     transform:scale(0.97);
 }
+.access-table{
+    width:100%;
+    overflow-x:auto;
+}
+
+.access-row{
+    display:grid;
+    grid-template-columns:
+        110px 70px 70px 70px 130px 70px;
+    gap:10px;
+    align-items:center;
+    padding:13px 10px;
+    background:#f8f9fc;
+    border-radius:10px;
+    margin-bottom:8px;
+    min-width:560px;
+}
+
+.access-header{
+    background:#eef2f8;
+    font-weight:700;
+}
+
+.access-row span{
+    text-align:center;
+}
+
+#accessList{
+    display:flex;
+    flex-direction:column;
+}
 
 /* ============================
    更新時刻
@@ -295,28 +326,42 @@ body{
     <!-- ============================
          アクセス概要
     ============================ -->
+<div class="summary">
 
-    <div class="summary">
-
-        <div class="stat-card">
-
-            <div class="stat-label">
-                累計アクセス
-            </div>
-
-            <div>
-                <span
-                    id="totalAccess"
-                    class="stat-number">
-                    —
-                </span>
-
-                <span class="stat-unit">
-                    回
-                </span>
-            </div>
-
+    <div class="stat-card">
+        <div class="stat-label">Home 累計</div>
+        <div>
+            <span id="homeAccess" class="stat-number">—</span>
+            <span class="stat-unit">回</span>
         </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Quick Response 累計</div>
+        <div>
+            <span id="quickAccess" class="stat-number">—</span>
+            <span class="stat-unit">回</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Summarization 累計</div>
+        <div>
+            <span id="summarizationAccess" class="stat-number">—</span>
+            <span class="stat-unit">回</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Short Interpretation 累計</div>
+        <div>
+            <span id="shortAccess" class="stat-number">—</span>
+            <span class="stat-unit">回</span>
+        </div>
+    </div>
+
+</div>
+  
 
 
         <div class="stat-card">
@@ -354,24 +399,32 @@ body{
             過去7日間のアクセス
         </h2>
 
+<div class="access-table">
 
-        <div
-            id="accessList"
-            class="access-list">
+    <div class="access-row access-header">
+        <span>日付</span>
+        <span>合計</span>
+        <span>Home</span>
+        <span>Quick</span>
+        <span>Summarization</span>
+        <span>Short</span>
+    </div>
 
-            <div class="access-row">
+    <div id="accessList">
 
-                <span class="access-date">
-                    読み込み中...
-                </span>
-
-                <span class="access-count">
-                    —
-                </span>
-
-            </div>
-
+        <div class="access-row">
+            <span>読み込み中...</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
         </div>
+
+    </div>
+
+</div>
+       
 
 
         <div class="total-row">
@@ -452,22 +505,26 @@ const response =
         // ============================
         // 累計
         // ============================
+document.getElementById(
+    "homeAccess"
+).textContent =
+    data.courseTotals?.Home || 0;
 
-        document.getElementById(
-            "totalAccess"
-        ).textContent =
-            data.total || 0;
+document.getElementById(
+    "quickAccess"
+).textContent =
+    data.courseTotals?.Quick || 0;
 
+document.getElementById(
+    "summarizationAccess"
+).textContent =
+    data.courseTotals?.Summarization || 0;
 
-        // ============================
-        // 過去7日間
-        // ============================
-
-        document.getElementById(
-            "weeklyAccess"
-        ).textContent =
-            data.weeklyTotal || 0;
-
+document.getElementById(
+    "shortAccess"
+).textContent =
+    data.courseTotals?.Short || 0;
+       
 
         document.getElementById(
             "weeklyTotal"
@@ -503,17 +560,21 @@ const response =
                     "access-row";
 
 
-                row.innerHTML = `
+               row.innerHTML = `
 
-                    <span class="access-date">
-                        ${day.date}
-                    </span>
+    <span>${day.date}</span>
 
-                    <span class="access-count">
-                        ${day.count}回
-                    </span>
+    <span>${day.count}回</span>
 
-                `;
+    <span>${day.Home}回</span>
+
+    <span>${day.Quick}回</span>
+
+    <span>${day.Summarization}回</span>
+
+    <span>${day.Short}回</span>
+
+`;
                 accessList.appendChild(row);
             });
 
@@ -598,8 +659,7 @@ document.getElementById(
 // 起動
 // ============================
 
-// GAS接続が完成したら有効化
-// loadAccessData();
+loadAccessData();
 
 </script>
 
