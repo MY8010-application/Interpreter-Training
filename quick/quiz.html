@@ -757,10 +757,14 @@ document.getElementById("showAnswerBtn").style.display = "inline-block";
         break;
 
     case "km":
-        document.getElementById("answer").textContent = word.km;
-        break;
+    document.getElementById("answer").textContent = word.km;
+    break;
 
-    default:
+case "es":
+    document.getElementById("answer").textContent = word.es;
+    break;
+
+default:
         document.getElementById("answer").textContent = "翻訳データがありません";
 }
 
