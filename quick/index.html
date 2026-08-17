@@ -148,6 +148,10 @@ h1{
 .km{
     background:#D97706;
 }
+
+.es{
+    background:#DC2626;
+}
     
 .language-btn:hover{
     transform:translateY(-3px);
@@ -290,6 +294,11 @@ onclick="selectLanguage('Vocabulary','km')">
 ខ្មែរ
 </button>
 
+<button id="Vocabulary-es" class="language-btn es"
+onclick="selectLanguage('Vocabulary','es')">
+Español
+</button>
+
 </div>
 
 </div>
@@ -338,6 +347,11 @@ Tiếng Việt
 <button id="Expression-de" class="language-btn de"
 onclick="selectLanguage('Expression','de')">
 Deutsch
+</button>
+
+<button id="Expression-km" class="language-btn km"
+onclick="selectLanguage('Expression','km')">
+ខ្មែរ
 </button>
 
 <button id="Expression-km" class="language-btn km"
@@ -400,6 +414,11 @@ onclick="selectLanguage('All','km')">
 ខ្មែរ
 </button>
 
+<button id="All-es" class="language-btn es"
+onclick="selectLanguage('All','es')">
+Español
+</button>
+    
 </div>
 
 </div>
@@ -424,7 +443,8 @@ async function checkLanguages(){
         "mn",
         "vi",
         "de",
-        "km"
+        "km",
+        "es"
     ];
 
     const response = await fetch(
