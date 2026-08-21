@@ -482,7 +482,11 @@ h2{
     style="display:none;">
 START TRAINING
 </button>
-
+    
+<div id="questionCountDisplay"
+     style="margin-top:10px;font-weight:bold;color:#666;">
+</div>
+    
 <div class="card">
 
 <h2>How to Use</h2>
@@ -514,6 +518,7 @@ START TRAINING
 let questionCount = 50;
 let selectedThemes = [];
 let selectedMode = null;
+let themeCounts = {};
 
 const gasUrl =
 "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec";
@@ -606,11 +611,16 @@ async function checkThemes(){
             );
         }
 
-        const themeCounts =
-            await response.json();
+        themeCounts =
+    await response.json();
 
         document
             .querySelectorAll(".theme-btn")
+            const questionCountDisplay =
+    document.getElementById("questionCountDisplay");
+
+questionCountDisplay.textContent =
+    "選択したテーマの問題数：0問";
             .forEach(button => {
 
                 const theme =
@@ -667,6 +677,18 @@ function toggleTheme(theme,button){
         button.classList.add("selected");
 
     }
+
+    const totalSelectedQuestions =
+        selectedThemes.reduce(
+            (total, selectedTheme) =>
+                total + (themeCounts[selectedTheme] || 0),
+            0
+        );
+
+    document.getElementById("questionCountDisplay").textContent =
+        "選択したテーマの問題数：" +
+        totalSelectedQuestions +
+        "問";
 
 }
 
