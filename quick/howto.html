@@ -133,7 +133,43 @@ h2{
     transition:all .2s ease;
     line-height:1.6;
 }
+.theme-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin:25px auto;
+}
 
+.theme-btn{
+    background:white;
+    border:2px solid #121212;
+    border-radius:14px;
+    padding:14px 10px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all .2s ease;
+}
+
+.theme-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(0,0,0,.12);
+}
+
+.theme-btn.selected{
+    background:#4255ff;
+    color:white;
+    border-color:#4255ff;
+}
+
+@media(max-width:768px){
+
+    .theme-btn{
+        padding:10px 5px;
+        font-size:14px;
+    }
+
+}
 .course-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 8px 20px rgba(0,0,0,.15);
@@ -260,7 +296,46 @@ h2{
     </div>
 
 </div>
+<div class="card">
 
+<h2>
+テーマを選択<br>
+<small>Choose Themes</small>
+</h2>
+
+<p style="color:#666;font-size:14px;">
+複数選択できます
+</p>
+
+<div class="theme-grid">
+
+<button class="theme-btn" onclick="toggleTheme('oyagami',this)">
+親神様
+</button>
+
+<button class="theme-btn" onclick="toggleTheme('oyasama',this)">
+教祖
+</button>
+
+<button class="theme-btn" onclick="toggleTheme('yokigurashi',this)">
+陽気ぐらし
+</button>
+
+<button class="theme-btn" onclick="toggleTheme('jiba',this)">
+ぢば
+</button>
+
+<button class="theme-btn" onclick="toggleTheme('tsutome',this)">
+つとめ
+</button>
+
+<button class="theme-btn" onclick="toggleTheme('sazuke_yoboku',this)">
+さづけ・ようぼく
+</button>
+
+</div>
+
+</div>
 <div class="card">
     
 <h2>
@@ -328,7 +403,28 @@ START　TRANING
 <script>
 
 let questionCount = 50;
+let selectedThemes = [];
 
+function toggleTheme(theme, button){
+
+    if(selectedThemes.includes(theme)){
+
+        selectedThemes =
+            selectedThemes.filter(
+                item => item !== theme
+            );
+
+        button.classList.remove("selected");
+
+    }else{
+
+        selectedThemes.push(theme);
+
+        button.classList.add("selected");
+
+    }
+
+}
 function selectCourse(count, button){
 
     questionCount = count;
@@ -343,7 +439,15 @@ function selectCourse(count, button){
 
 function startQuiz(){
 
-    localStorage.setItem("questionCount", questionCount);
+    localStorage.setItem(
+        "questionCount",
+        questionCount
+    );
+
+    localStorage.setItem(
+        "selectedThemes",
+        JSON.stringify(selectedThemes)
+    );
 
     window.location.href = "quiz.html";
 
