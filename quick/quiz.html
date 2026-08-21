@@ -586,7 +586,8 @@ const selectedThemes =
         localStorage.getItem("selectedThemes") || "[]"
     );
 
-if(quickMode === "theme"){
+// テーマ選択モードの場合だけテーマで絞り込む
+if(quickMode === "theme" && selectedThemes.length > 0){
 
     words = words.filter(word =>
         selectedThemes.includes(word.theme)
@@ -594,18 +595,17 @@ if(quickMode === "theme"){
 
 }
 
-// 選択した問題数を取得
-
-// 選択した問題数を取得
-const questionCount = Number(localStorage.getItem("questionCount")) || 50;
+// 問題数
+const questionCount =
+    Number(localStorage.getItem("questionCount")) || 50;
 
 // シャッフル
 words.sort(() => Math.random() - 0.5);
 
-// 選択した問題数だけ使う
+// 指定された問題数だけ使用
 words = words.slice(0, questionCount);
 
-// 合計問題数を更新
+// 合計問題数
 totalWords = words.length;
 
 nextQuestion();
