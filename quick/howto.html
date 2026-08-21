@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,12 +10,12 @@
 <style>
 
 body{
-    font-family: Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#cccccc;
     text-align:center;
     padding:30px;
 }
-    
+
 .container{
     max-width:800px;
     margin:auto;
@@ -24,6 +25,7 @@ body{
     box-shadow:0 0 50px rgba(0,0,0,0.5);
     position:relative;
 }
+
 .top-btn{
     position:absolute;
     top:20px;
@@ -45,16 +47,6 @@ body{
     background:#666;
 }
 
-@media(max-width:768px){
-
-    .top-btn{
-        top:15px;
-        right:15px;
-        padding:8px 12px;
-        font-size:12px;
-    }
-
-}
 .app-title{
     display:inline-block;
     background:white;
@@ -90,7 +82,6 @@ h2{
     font-size:24px;
     font-weight:bold;
     cursor:pointer;
-
     display:block;
     margin:25px auto 0;
 }
@@ -99,7 +90,6 @@ h2{
     transform:translateY(-2px);
 }
 
-   
 .title-main{
     font-size:22px;
     font-weight:800;
@@ -133,6 +123,23 @@ h2{
     transition:all .2s ease;
     line-height:1.6;
 }
+
+.course-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.course-btn.selected{
+    background:#4255ff;
+    color:white;
+    border-color:#4255ff;
+}
+
+.course-btn small{
+    font-size:14px;
+    font-weight:normal;
+}
+
 .theme-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -161,6 +168,7 @@ h2{
     color:white;
     border-color:#4255ff;
 }
+
 .theme-btn.disabled{
     background:#cfcfcf;
     color:#666;
@@ -169,30 +177,39 @@ h2{
     pointer-events:none;
 }
 
-@media(max-width:768px){
-
-    .theme-btn{
-        padding:10px 5px;
-        font-size:14px;
-    }
-
+.mode-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin:25px auto;
 }
-.course-btn:hover{
+
+.mode-btn{
+    background:white;
+    border:2px solid #121212;
+    border-radius:18px;
+    padding:20px 10px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all .2s ease;
+}
+
+.mode-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-.course-btn.selected{
+.mode-btn.selected{
     background:#4255ff;
     color:white;
     border-color:#4255ff;
 }
 
-.course-btn small{
-    font-size:14px;
-    font-weight:normal;
+.selection-area{
+    display:none;
 }
-    
+
 .card{
     background:white;
     border-radius:18px;
@@ -200,15 +217,13 @@ h2{
     margin:25px 0;
     box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
-/* 戻るボタン */
-.back-btn{
 
+.back-btn{
     background:#4255ff;
     color:white;
     border:none;
     border-radius:18px;
-    box-shadow:
-    0 4px 10px rgba(0,0,0,0.15);
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
     padding:12px 24px;
     font-size:16px;
     font-weight:bold;
@@ -216,14 +231,11 @@ h2{
     transition:all 0.2s ease;
 }
 
-
 .back-btn:hover{
-
     transform:translateY(-2px);
-    box-shadow:
-    0 6px 15px rgba(66,85,255,0.3);
-
+    box-shadow:0 6px 15px rgba(66,85,255,0.3);
 }
+
 .top-bar{
     position:relative;
     height:60px;
@@ -243,12 +255,22 @@ h2{
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-}
-.top-bar .app-title{
     margin-bottom:0;
 }
 
 @media(max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    .top-btn{
+        top:15px;
+        right:15px;
+        padding:8px 12px;
+        font-size:12px;
+    }
+
     .top-bar{
         height:auto;
         display:flex;
@@ -258,28 +280,39 @@ h2{
         margin-bottom:20px;
     }
 
-   .top-bar .back-btn{
-    position:static;
-    transform:none;
-    align-self:flex-start;
-    padding:6px 12px;
-    font-size:12px;
+    .top-bar .back-btn{
+        position:static;
+        transform:none;
+        align-self:flex-start;
+        padding:6px 12px;
+        font-size:12px;
+    }
+
+    .top-bar .app-title{
+        position:static;
+        transform:none;
+        margin-top:50px;
+        margin-bottom:0;
+        font-size:28px;
+        padding:14px 24px;
+    }
+
+    .mode-grid{
+        grid-template-columns:1fr;
+    }
+
+    .theme-btn{
+        padding:10px 5px;
+        font-size:14px;
+    }
+
+    .course-btn{
+        padding:8px 5px;
+        font-size:14px;
+    }
+
 }
 
-   .top-bar .app-title{
-    position:static;
-    transform:none;
-    margin-top:50px;
-    margin-bottom:0;
-    font-size:28px;
-    padding:14px 24px;
-}
-    .course-btn{
-    padding:8px 5px;
-    font-size:14px;
-}
-}
-    
 </style>
 </head>
 
@@ -290,7 +323,7 @@ h2{
 <button class="top-btn" onclick="location.href='../index.html'">
 ← トップへ
 </button>
-    
+
 <div class="top-bar">
 
     <button class="back-btn" onclick="goBack()">
@@ -303,7 +336,42 @@ h2{
     </div>
 
 </div>
+
+<!-- 練習方法選択 -->
+
 <div class="card">
+
+<h2>
+練習方法を選択<br>
+<small>Choose Practice Method</small>
+</h2>
+
+<div class="mode-grid">
+
+<button
+    id="themeModeBtn"
+    class="mode-btn"
+    onclick="selectMode('theme')">
+テーマで選択
+</button>
+
+<button
+    id="randomModeBtn"
+    class="mode-btn"
+    onclick="selectMode('random')">
+問題数で選択<br>
+<small>ランダムテーマ</small>
+</button>
+
+</div>
+
+</div>
+
+<!-- テーマ選択 -->
+
+<div
+    id="themeArea"
+    class="card selection-area">
 
 <h2>
 テーマを選択<br>
@@ -316,47 +384,58 @@ h2{
 
 <div class="theme-grid">
 
-<button class="theme-btn"
-        data-theme="oyagami"
-        onclick="toggleTheme('oyagami',this)">
+<button
+    class="theme-btn"
+    data-theme="oyagami"
+    onclick="toggleTheme('oyagami',this)">
 親神様
 </button>
 
-<button class="theme-btn"
-        data-theme="oyasama"
-        onclick="toggleTheme('oyasama',this)">
+<button
+    class="theme-btn"
+    data-theme="oyasama"
+    onclick="toggleTheme('oyasama',this)">
 教祖
 </button>
 
-<button class="theme-btn"
-        data-theme="yokigurashi"
-        onclick="toggleTheme('yokigurashi',this)">
+<button
+    class="theme-btn"
+    data-theme="yokigurashi"
+    onclick="toggleTheme('yokigurashi',this)">
 陽気ぐらし
 </button>
 
-<button class="theme-btn"
-        data-theme="jiba"
-        onclick="toggleTheme('jiba',this)">
+<button
+    class="theme-btn"
+    data-theme="jiba"
+    onclick="toggleTheme('jiba',this)">
 ぢば
 </button>
 
-<button class="theme-btn"
-        data-theme="tsutome"
-        onclick="toggleTheme('tsutome',this)">
+<button
+    class="theme-btn"
+    data-theme="tsutome"
+    onclick="toggleTheme('tsutome',this)">
 つとめ
 </button>
 
-<button class="theme-btn"
-        data-theme="sazuke_yoboku"
-        onclick="toggleTheme('sazuke_yoboku',this)">
+<button
+    class="theme-btn"
+    data-theme="sazuke_yoboku"
+    onclick="toggleTheme('sazuke_yoboku',this)">
 さづけ・ようぼく
 </button>
 
 </div>
 
 </div>
-<div class="card">
-    
+
+<!-- 問題数選択 -->
+
+<div
+    id="randomArea"
+    class="card selection-area">
+
 <h2>
 問題数を選択<br>
 <small>Choose Practice Size</small>
@@ -364,37 +443,48 @@ h2{
 
 <div class="course-grid">
 
-<button class="course-btn selected" onclick="selectCourse(50,this)">
+<button
+    class="course-btn selected"
+    onclick="selectCourse(50,this)">
 <br>Warm-up<br>
 <small>50 Questions</small>
 </button>
 
-<button class="course-btn" onclick="selectCourse(100,this)">
+<button
+    class="course-btn"
+    onclick="selectCourse(100,this)">
 <br>Basic<br>
 <small>100 Questions</small>
 </button>
 
-<button class="course-btn" onclick="selectCourse(150,this)">
+<button
+    class="course-btn"
+    onclick="selectCourse(150,this)">
 <br>Standard<br>
 <small>150 Questions</small>
 </button>
 
-<button class="course-btn" onclick="selectCourse(200,this)">
+<button
+    class="course-btn"
+    onclick="selectCourse(200,this)">
 <br>Challenge<br>
 <small>200 Questions</small>
-    
 </button>
 
 </div>
-    
-<button class="start-btn" onclick="startQuiz()">
-START　TRANING
-</button>
 
 </div>
+
+<button
+    id="startBtn"
+    class="start-btn"
+    onclick="startQuiz()"
+    style="display:none;">
+START TRAINING
+</button>
 
 <div class="card">
-    
+
 <h2>How to Use</h2>
 
 <img
@@ -408,7 +498,7 @@ START　TRANING
         margin:20px 0;
     "
 >
-    
+
 <div class="instructions">
 ① 「スタート」を押すと日本語が表示されます。<br>
 ② 時間内に言語で答えてください。<br>
@@ -418,14 +508,69 @@ START　TRANING
 </div>
 
 </div>
-    
+
 <script>
 
 let questionCount = 50;
 let selectedThemes = [];
+let selectedMode = null;
 
 const gasUrl =
 "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec";
+
+
+// ============================
+// 練習方法選択
+// ============================
+
+function selectMode(mode){
+
+    selectedMode = mode;
+
+    document
+        .getElementById("themeModeBtn")
+        .classList.remove("selected");
+
+    document
+        .getElementById("randomModeBtn")
+        .classList.remove("selected");
+
+    document
+        .getElementById(
+            mode === "theme"
+                ? "themeModeBtn"
+                : "randomModeBtn"
+        )
+        .classList.add("selected");
+
+    document.getElementById("themeArea").style.display =
+        mode === "theme" ? "block" : "none";
+
+    document.getElementById("randomArea").style.display =
+        mode === "random" ? "block" : "none";
+
+    document.getElementById("startBtn").style.display =
+        "block";
+
+    if(mode === "random"){
+
+        selectedThemes = [];
+
+        document
+            .querySelectorAll(".theme-btn")
+            .forEach(button => {
+                button.classList.remove("selected");
+            });
+
+    }
+
+    if(mode === "theme"){
+
+        questionCount = 50;
+
+    }
+
+}
 
 
 // ============================
@@ -441,7 +586,6 @@ async function checkThemes(){
         localStorage.getItem("language");
 
     if(!category || !language){
-        console.error("category または language がありません");
         return;
     }
 
@@ -450,47 +594,48 @@ async function checkThemes(){
         const response = await fetch(
             gasUrl +
             "?mode=themes" +
-            "&category=" + encodeURIComponent(category) +
-            "&language=" + encodeURIComponent(language)
+            "&category=" +
+            encodeURIComponent(category) +
+            "&language=" +
+            encodeURIComponent(language)
         );
 
         if(!response.ok){
-            throw new Error("テーマ情報の取得に失敗しました");
+            throw new Error(
+                "テーマ情報の取得に失敗しました"
+            );
         }
 
         const themeCounts =
             await response.json();
 
-        document.querySelectorAll(".theme-btn")
-        .forEach(button => {
+        document
+            .querySelectorAll(".theme-btn")
+            .forEach(button => {
 
-            const theme =
-                button.dataset.theme;
+                const theme =
+                    button.dataset.theme;
 
-            const count =
-                themeCounts[theme] || 0;
+                const count =
+                    themeCounts[theme] || 0;
 
-            if(count === 0){
+                if(count === 0){
 
-                button.classList.add("disabled");
+                    button.classList.add("disabled");
 
-                button.innerHTML =
-                    button.innerHTML +
-                    "<br><small>準備中</small>";
+                    button.innerHTML =
+                        button.innerHTML +
+                        "<br><small>準備中</small>";
 
-                button.onclick = null;
+                    button.onclick = null;
 
-            }
+                }
 
-        });
+            });
 
     }catch(error){
 
-        console.error(
-            "テーマ確認エラー:",
-            error
-        );
-
+        // 何もしない
     }
 
 }
@@ -500,7 +645,7 @@ async function checkThemes(){
 // テーマ選択
 // ============================
 
-function toggleTheme(theme, button){
+function toggleTheme(theme,button){
 
     if(button.classList.contains("disabled")){
         return;
@@ -530,14 +675,15 @@ function toggleTheme(theme, button){
 // 問題数選択
 // ============================
 
-function selectCourse(count, button){
+function selectCourse(count,button){
 
     questionCount = count;
 
-    document.querySelectorAll(".course-btn")
-    .forEach(btn=>{
-        btn.classList.remove("selected");
-    });
+    document
+        .querySelectorAll(".course-btn")
+        .forEach(btn => {
+            btn.classList.remove("selected");
+        });
 
     button.classList.add("selected");
 
@@ -550,6 +696,10 @@ function selectCourse(count, button){
 
 function startQuiz(){
 
+    if(!selectedMode){
+        return;
+    }
+
     localStorage.setItem(
         "questionCount",
         questionCount
@@ -557,7 +707,16 @@ function startQuiz(){
 
     localStorage.setItem(
         "selectedThemes",
-        JSON.stringify(selectedThemes)
+        JSON.stringify(
+            selectedMode === "theme"
+                ? selectedThemes
+                : []
+        )
+    );
+
+    localStorage.setItem(
+        "quickMode",
+        selectedMode
     );
 
     window.location.href =
@@ -588,3 +747,4 @@ checkThemes();
 
 </body>
 </html>
+```
