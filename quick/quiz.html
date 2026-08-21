@@ -562,20 +562,37 @@ if(saved){
 async function loadJSON() {
     try {
 
-       const category = localStorage.getItem("category");
+const category = localStorage.getItem("category");
+const language = localStorage.getItem("language");
 
 const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec"
+    "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec" +
+    "?mode=data" +
+    "&category=" + encodeURIComponent(category) +
+    "&language=" + encodeURIComponent(language)
 );
 
 if(!response.ok){
     throw new Error("データ取得失敗");
 }
 
-const allWords = await response.json();
+words = await response.json();
 
-words = allWords[category];
+const quickMode =
+    localStorage.getItem("quickMode");
 
+const selectedThemes =
+    JSON.parse(
+        localStorage.getItem("selectedThemes") || "[]"
+    );
+
+if(quickMode === "theme"){
+
+    words = words.filter(word =>
+        selectedThemes.includes(word.theme)
+    );
+
+}
 // 選択したテーマを取得
 const selectedThemes =
     JSON.parse(
