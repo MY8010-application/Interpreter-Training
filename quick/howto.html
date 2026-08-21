@@ -161,6 +161,13 @@ h2{
     color:white;
     border-color:#4255ff;
 }
+.theme-btn.disabled{
+    background:#cfcfcf;
+    color:#666;
+    border-color:#aaa;
+    cursor:not-allowed;
+    pointer-events:none;
+}
 
 @media(max-width:768px){
 
@@ -309,27 +316,39 @@ h2{
 
 <div class="theme-grid">
 
-<button class="theme-btn" onclick="toggleTheme('oyagami',this)">
+<button class="theme-btn"
+        data-theme="oyagami"
+        onclick="toggleTheme('oyagami',this)">
 親神様
 </button>
 
-<button class="theme-btn" onclick="toggleTheme('oyasama',this)">
+<button class="theme-btn"
+        data-theme="oyasama"
+        onclick="toggleTheme('oyasama',this)">
 教祖
 </button>
 
-<button class="theme-btn" onclick="toggleTheme('yokigurashi',this)">
+<button class="theme-btn"
+        data-theme="yokigurashi"
+        onclick="toggleTheme('yokigurashi',this)">
 陽気ぐらし
 </button>
 
-<button class="theme-btn" onclick="toggleTheme('jiba',this)">
+<button class="theme-btn"
+        data-theme="jiba"
+        onclick="toggleTheme('jiba',this)">
 ぢば
 </button>
 
-<button class="theme-btn" onclick="toggleTheme('tsutome',this)">
+<button class="theme-btn"
+        data-theme="tsutome"
+        onclick="toggleTheme('tsutome',this)">
 つとめ
 </button>
 
-<button class="theme-btn" onclick="toggleTheme('sazuke_yoboku',this)">
+<button class="theme-btn"
+        data-theme="sazuke_yoboku"
+        onclick="toggleTheme('sazuke_yoboku',this)">
 さづけ・ようぼく
 </button>
 
@@ -405,7 +424,87 @@ START　TRANING
 let questionCount = 50;
 let selectedThemes = [];
 
+const gasUrl =
+"https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec";
+
+
+// ============================
+// テーマの問題数を確認
+// ============================
+
+async function checkThemes(){
+
+    const category =
+        localStorage.getItem("category");
+
+    const language =
+        localStorage.getItem("language");
+
+    if(!category || !language){
+        console.error("category または language がありません");
+        return;
+    }
+
+    try{
+
+        const response = await fetch(
+            gasUrl +
+            "?mode=themes" +
+            "&category=" + encodeURIComponent(category) +
+            "&language=" + encodeURIComponent(language)
+        );
+
+        if(!response.ok){
+            throw new Error("テーマ情報の取得に失敗しました");
+        }
+
+        const themeCounts =
+            await response.json();
+
+        document.querySelectorAll(".theme-btn")
+        .forEach(button => {
+
+            const theme =
+                button.dataset.theme;
+
+            const count =
+                themeCounts[theme] || 0;
+
+            if(count === 0){
+
+                button.classList.add("disabled");
+
+                button.innerHTML =
+                    button.innerHTML +
+                    "<br><small>準備中</small>";
+
+                button.onclick = null;
+
+            }
+
+        });
+
+    }catch(error){
+
+        console.error(
+            "テーマ確認エラー:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================
+// テーマ選択
+// ============================
+
 function toggleTheme(theme, button){
+
+    if(button.classList.contains("disabled")){
+        return;
+    }
 
     if(selectedThemes.includes(theme)){
 
@@ -425,17 +524,29 @@ function toggleTheme(theme, button){
     }
 
 }
+
+
+// ============================
+// 問題数選択
+// ============================
+
 function selectCourse(count, button){
 
     questionCount = count;
 
-    document.querySelectorAll(".course-btn").forEach(btn=>{
+    document.querySelectorAll(".course-btn")
+    .forEach(btn=>{
         btn.classList.remove("selected");
     });
 
     button.classList.add("selected");
 
 }
+
+
+// ============================
+// スタート
+// ============================
 
 function startQuiz(){
 
@@ -449,16 +560,30 @@ function startQuiz(){
         JSON.stringify(selectedThemes)
     );
 
-    window.location.href = "quiz.html";
+    window.location.href =
+        "quiz.html";
 
 }
-    
+
+
+// ============================
+// 戻る
+// ============================
+
 function goBack(){
 
-    window.location.href = "index.html";
+    window.location.href =
+        "index.html";
 
 }
-    
+
+
+// ============================
+// 起動
+// ============================
+
+checkThemes();
+
 </script>
 
 </body>
