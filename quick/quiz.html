@@ -576,6 +576,23 @@ const allWords = await response.json();
 
 words = allWords[category];
 
+// 選択したテーマを取得
+const selectedThemes =
+    JSON.parse(
+        localStorage.getItem("selectedThemes") || "[]"
+    );
+
+// テーマが選択されている場合だけ絞り込む
+if(selectedThemes.length > 0){
+
+    words = words.filter(word =>
+        selectedThemes.includes(word.theme)
+    );
+
+}
+
+// 選択した問題数を取得
+
 // 選択した問題数を取得
 const questionCount = Number(localStorage.getItem("questionCount")) || 50;
 
