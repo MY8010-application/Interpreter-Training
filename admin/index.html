@@ -329,14 +329,6 @@ body{
 <div class="summary">
 
     <div class="stat-card">
-        <div class="stat-label">Home 累計</div>
-        <div>
-            <span id="homeAccess" class="stat-number">—</span>
-            <span class="stat-unit">回</span>
-        </div>
-    </div>
-
-    <div class="stat-card">
         <div class="stat-label">Quick Response 累計</div>
         <div>
             <span id="quickAccess" class="stat-number">—</span>
@@ -505,11 +497,6 @@ const response =
         // ============================
         // 累計
         // ============================
-document.getElementById(
-    "homeAccess"
-).textContent =
-    data.courseTotals?.Home || 0;
-
 document.getElementById(
     "quickAccess"
 ).textContent =
