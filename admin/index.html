@@ -351,7 +351,14 @@ body{
             <span class="stat-unit">回</span>
         </div>
     </div>
-
+    
+<div class="stat-card">
+    <div class="stat-label">3コース合計 累計</div>
+    <div>
+        <span id="totalAccess" class="stat-number">—</span>
+        <span class="stat-unit">回</span>
+    </div>
+</div>
 </div>
   
 
@@ -396,7 +403,6 @@ body{
     <div class="access-row access-header">
         <span>日付</span>
         <span>合計</span>
-        <span>Home</span>
         <span>Quick</span>
         <span>Summarization</span>
         <span>Short</span>
@@ -511,7 +517,13 @@ document.getElementById(
     "shortAccess"
 ).textContent =
     data.courseTotals?.Short || 0;
-       
+
+document.getElementById(
+    "totalAccess"
+).textContent =
+    (data.courseTotals?.Quick || 0) +
+    (data.courseTotals?.Summarization || 0) +
+    (data.courseTotals?.Short || 0);
 
         document.getElementById(
             "weeklyTotal"
@@ -552,8 +564,6 @@ document.getElementById(
     <span>${day.date}</span>
 
     <span>${day.count}回</span>
-
-    <span>${day.Home}回</span>
 
     <span>${day.Quick}回</span>
 
