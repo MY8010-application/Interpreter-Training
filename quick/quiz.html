@@ -602,8 +602,10 @@ const questionCount =
 // シャッフル
 words.sort(() => Math.random() - 0.5);
 
-// 指定された問題数だけ使用
-words = words.slice(0, questionCount);
+// 問題数で選択した場合だけ指定問題数にする
+if(quickMode === "random"){
+    words = words.slice(0, questionCount);
+}
 
 // 合計問題数
 totalWords = words.length;
