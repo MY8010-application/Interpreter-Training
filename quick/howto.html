@@ -523,7 +523,8 @@ START TRAINING
 let questionCount = 50;
 let selectedThemes = [];
 let selectedMode = null;
-
+let themeCounts = {};
+    
 const gasUrl =
 "https://script.google.com/macros/s/AKfycbz4RC1MjqKRTuW2PHHdCOd4e5l_1QZUVagJyOi2b1tgjVCBHgIB1BwI794njktyrxlx/exec";
 
@@ -615,7 +616,7 @@ async function checkThemes(){
             );
         }
 
-        const themeCounts =
+        themeCounts =
             await response.json();
 
         document
@@ -677,7 +678,31 @@ function toggleTheme(theme,button){
 
     }
 
-    updateQuestionCount();
+       updateQuestionCount();
+
+}
+
+
+// ============================
+// 選択中の問題数を更新
+// ============================
+
+function updateQuestionCount(){
+
+    let total = 0;
+
+    selectedThemes.forEach(theme => {
+
+        total += themeCounts[theme] || 0;
+
+    });
+
+    document.getElementById(
+        "selectedQuestionCount"
+    ).textContent =
+        "選択中：" + total + "問";
+
+}
 
 }
 
