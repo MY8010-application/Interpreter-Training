@@ -192,10 +192,10 @@ onclick="location.href='summarization/index.html'">
 </div>
 <div class="app-guide">
 
-<h2>アプリのように使う方法</h2>
+<h2></h2>
 
 <button onclick="toggleGuide()">
-使い方を見る
+アプリのように使う方法 ▶︎
 </button>
 
 <div id="guideImage" class="app-guide-content" style="display:none;">
@@ -232,10 +232,23 @@ function toggleGuide(){
     const guide =
         document.getElementById("guideImage");
 
+    const button =
+        document.getElementById("guideBtn");
+
     if(guide.style.display === "none"){
+
         guide.style.display = "block";
+
+        button.textContent =
+            "アプリのように使う方法 ▼";
+
     }else{
+
         guide.style.display = "none";
+
+        button.textContent =
+            "アプリのように使う方法 ▶︎";
+
     }
 
 }
