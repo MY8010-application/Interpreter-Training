@@ -787,11 +787,17 @@ function(){
    
     }
 );
+    
 /* Spaceキーで再生・一時停止 */
 document.addEventListener("keydown", function(event){
     if(event.code === "Space"){
         event.preventDefault();
         document.getElementById("playBtn").click();
+    }
+/*Enterキーで「次へ」*/
+    if(event.code === "Enter"){
+        event.preventDefault();
+        document.getElementById("completeBtn").click();
     }
 });
     
