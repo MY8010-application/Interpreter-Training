@@ -105,6 +105,50 @@ font-weight:normal;
     .card h2 span{
     font-size:12px;
     }
+/* ============================
+   アプリのように使う方法
+============================ */
+
+.app-guide{
+    text-align:center;
+    margin-top:50px;
+}
+
+.app-guide-btn{
+    background:white;
+    border:2px solid #4a6cff;
+    color:#4a6cff;
+    border-radius:14px;
+    padding:14px 24px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.app-guide-btn:hover{
+    background:#4a6cff;
+    color:white;
+    transform:translateY(-2px);
+}
+
+.app-guide-content{
+    display:none;
+    margin-top:25px;
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.app-guide-content img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    margin:0 auto;
+    border-radius:12px;
+}
 }
 </style>
 </head>
@@ -142,7 +186,22 @@ onclick="location.href='summarization/index.html'">
 </a>
     
 </div>
+<div class="app-guide">
 
+<h2>アプリのように使う方法</h2>
+
+<button onclick="toggleGuide()">
+使い方を見る
+</button>
+
+<div id="guideImage" style="display:none;">
+    <img
+        src="app-guide.png"
+        alt="アプリのように使う方法"
+    >
+</div>
+
+</div>
 <footer>
 
 © MY
@@ -163,6 +222,19 @@ if("serviceWorker" in navigator){
 fetch(
     "https://script.google.com/macros/s/AKfycbxHHbkhTkYuUj6nmbIQMu0o-e4u4669nMrAU3p9fATmTk4K_KD2dzL3LtFhbl9Twxj1/exec?course=Home"
 );
+
+function toggleGuide(){
+
+    const guide =
+        document.getElementById("guideImage");
+
+    if(guide.style.display === "none"){
+        guide.style.display = "block";
+    }else{
+        guide.style.display = "none";
+    }
+
+}
 </script>
 
 </body>
