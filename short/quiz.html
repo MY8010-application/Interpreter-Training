@@ -787,7 +787,14 @@ function(){
    
     }
 );
-
+/* Spaceキーで再生・一時停止 */
+document.addEventListener("keydown", function(event){
+    if(event.code === "Space"){
+        event.preventDefault();
+        document.getElementById("playBtn").click();
+    }
+});
+    
 /* 次へ・評価へ */
 document.getElementById("completeBtn").addEventListener(
     "click",
