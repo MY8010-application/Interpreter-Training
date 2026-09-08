@@ -559,6 +559,8 @@ let firstQuestion = true;
 let paused = false;
 let reviewWords = [];
 let currentWord = null;
+let currentWord = null;
+let isReviewing = false;
     
 const totalTime = 5;
 // -----------------------------
@@ -644,6 +646,9 @@ function nextQuestion(){
     clearInterval(timer);
     clearTimeout(answerTimer);
 
+    //　復習終了後の復習モードなし
+    isReviewing = false;
+
     // Complete表示
     document.getElementById("question").textContent = "🎉 Complete!";
 
@@ -655,6 +660,10 @@ function nextQuestion(){
     document.getElementById("reviewButtons").style.display = "none";
     document.querySelector(".next-btn").style.display = "none";
     document.getElementById("pauseBtn").style.display = "none";
+   
+    if(!isReviewing){
+    document.getElementById("completeButtons").style.display = "block";
+}
 
     // 進捗バーは100%
     document.getElementById("progressFill").style.width = "100%";
@@ -903,7 +912,36 @@ function togglePause(){
     function goBackCourse(){
     window.location.href = "howto.html";
 }
-    
+
+    function startReview(){
+
+    if(reviewWords.length === 0){
+        alert("復習する問題がありません。");
+        return;
+    }
+
+    words = [...reviewWords];
+    isReviewing = true;
+    reviewWords = [];
+
+    localStorage.setItem("reviewWords", JSON.stringify(reviewWords));
+
+    totalWords = words.length;
+    firstQuestion = false;
+
+    document.getElementById("completeButtons").style.display = "none";
+    document.getElementById("progressText").style.display = "block";
+    document.getElementById("progressBar").style.display = "block";
+    document.querySelector(".timer-circle").style.display = "block";
+    document.getElementById("timer").style.display = "block";
+    document.getElementById("showAnswerBtn").style.display = "inline-block";
+    document.querySelector(".next-btn").style.display = "inline-block";
+    document.getElementById("pauseBtn").style.display = "inline-block";
+
+    words.sort(() => Math.random() - 0.5);
+
+    nextQuestion();
+}
 // -----------------------------
 // 戻る
 // -----------------------------
