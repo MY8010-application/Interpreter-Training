@@ -559,7 +559,6 @@ let firstQuestion = true;
 let paused = false;
 let reviewWords = [];
 let currentWord = null;
-let currentWord = null;
 let isReviewing = false;
     
 const totalTime = 5;
@@ -646,8 +645,6 @@ function nextQuestion(){
     clearInterval(timer);
     clearTimeout(answerTimer);
 
-    //　復習終了後の復習モードなし
-    isReviewing = false;
 
     // Complete表示
     document.getElementById("question").textContent = "🎉 Complete!";
