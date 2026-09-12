@@ -646,13 +646,14 @@ function nextQuestion(){
     clearTimeout(answerTimer);
 
 
-    // Complete表示
-    document.getElementById("question").textContent = "🎉 Complete!";
+  // Complete表示
+document.getElementById("question").textContent = "🎉 Complete!";
 
-    if(isReviewing){
-        isReviewing = false;
-}
-    // 非表示にする
+// 復習中だったかを記録
+const wasReviewing = isReviewing;
+isReviewing = false;
+
+// 非表示にする
     document.querySelector(".timer-circle").style.display = "none";
     document.getElementById("timer").style.display = "none";
     document.getElementById("answer").style.display = "none";
@@ -661,10 +662,9 @@ function nextQuestion(){
     document.querySelector(".next-btn").style.display = "none";
     document.getElementById("pauseBtn").style.display = "none";
    
-    if(!isReviewing){
+    if(!wasReviewing){
     document.getElementById("completeButtons").style.display = "block";
 }
-
     // 進捗バーは100%
     document.getElementById("progressFill").style.width = "100%";
 
