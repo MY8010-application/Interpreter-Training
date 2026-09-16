@@ -267,7 +267,12 @@ textarea:focus{
     color:white;
     font-size:18px;
    }
-
+.caution{
+    color:#777;
+    font-size:13px;
+    margin-top:8px;
+    margin-bottom:10px;
+}
 @media(max-width:768px){
 
     .container{
@@ -411,7 +416,9 @@ textarea:focus{
         <h2>
             📊 自己評価
         </h2>
-
+ <div class="caution">
+ ※評価ボタンを押すと「次へ」が表示されます。    
+ </div>
         <div class="review-buttons">
 
             <button class="good" onclick="rate('good')">
