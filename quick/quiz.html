@@ -965,6 +965,7 @@ function toggleDarkMode(){
 // キーボードショートカット
 // Space：一時停止／再生
 // Enter：次の問題
+// a:答え表示
 // ============================
 document.addEventListener("keydown", function(e){
 
@@ -976,6 +977,11 @@ document.addEventListener("keydown", function(e){
     if(e.code === "Enter"){
         e.preventDefault();
         nextQuestion();
+    }
+
+    if(e.code === "KeyA"){
+        e.preventDefault();
+        showAnswer();
     }
 
 });
