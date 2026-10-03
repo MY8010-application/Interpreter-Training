@@ -109,12 +109,25 @@ body{
     margin:5px auto 15px;
     display:none;
 }
- /*答え表示*/ 
+/* 答えカード */
 #answer{
-    font-size:28px;
-    color:#0066cc;
-    margin:30px 0;
     display:none;
+
+    max-width:600px;
+    margin:20px auto;
+    padding:24px 20px;
+
+    background:#ffffff;
+    border:2px solid #ef4444;
+    border-radius:16px;
+
+    color:#b91c1c;
+    font-size:28px;
+    font-weight:900;
+    line-height:1.6;
+    text-align:center;
+
+    box-shadow:0 6px 18px rgba(0,0,0,0.10);
 }
 
 button{
@@ -273,7 +286,9 @@ body.dark #question{
 }
 
 body.dark #answer{
-    color:white;
+    background:#2a2020;
+    border-color:#f87171;
+    color:#fca5a5;
 }
     
 body.dark .title-main,
