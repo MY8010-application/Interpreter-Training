@@ -72,11 +72,42 @@ body{
 }
     
  /*タイマー数字*/ 
-#timer{
-    font-size:28px;
+#timer {
+    font-size:24px;
     font-weight:bold;
     color:#ff3b30;
-    margin:10px 0;
+    margin:8px 0;
+}
+
+#timerBar {
+    width:80%;
+    max-width:400px;
+    height:12px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+    margin:10px auto;
+}
+
+#timerBarFill {
+    width:100%;
+    height:100%;
+    background:#ff3b30;
+    border-radius:10px;
+    transition:width 0.03s linear;
+}
+
+#pauseBtn {
+    width:42px;
+    height:36px;
+    border:none;
+    border-radius:8px;
+    background:#555;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    margin:5px auto 15px;
+    display:none;
 }
  /*答え表示*/ 
 #answer{
@@ -123,20 +154,7 @@ button:active{
 }
 
     
- /*円形タイマー*/ 
-.timer-circle{
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 20px auto;
-}
-   
-.timer-circle svg{
-    position:absolute;
-    top:0;
-    left:0;
-}
-    
+
 @keyframes popIn {
     0% {
         transform: scale(0.6);
@@ -175,35 +193,7 @@ button:active{
     transform:scale(1.05);
 }
 
-/*web用停止ボタン*/    
-#pauseBtn{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%, -50%);
 
-    width:48px;
-    height:48px;
-    padding:0;
-    margin:0;
-
-    background:white;
-    color:#222;
-    border:2px solid #ddd;
-    border-radius:50%;
-
-    font-size:22px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-    z-index:10;
-    display:none;
-
-    transition:transform 0.2s ease;
-}
     
 .title-main{
     font-size:22px;
@@ -378,17 +368,7 @@ button{
     margin:20px auto;
 }
     }
-/*スマホ用停止ボタン*/
- #pauseBtn{
-    width:32px;
-    height:32px;
 
-    font-size:16px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
 /*スマホダークモードボタン*/
     #darkModeBtn{
         width: 32px;
@@ -473,34 +453,14 @@ INTERPRETER TRAINING
 </div>
     
 <div id="question">読み込み中...</div>
-<div class="timer-circle">
-    <svg width="100" height="100">
-        <circle
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="#eee"
-            stroke-width="8"
-            fill="none"
-        />
-        <circle
-            id="progress"
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="#ff3b30"
-            stroke-width="8"
-            fill="none"
-            stroke-linecap="round"
-            stroke-dasharray="283"
-            stroke-dashoffset="0"
-        />
-    </svg>
-      <button id="pauseBtn" onclick="togglePause()">⏸</button>
 
+    <div id="timer">5</div>
+
+<div id="timerBar">
+    <div id="timerBarFill"></div>
 </div>
-    
-<div id="timer">5</div>
+
+<button id="pauseBtn" onclick="togglePause()">⏸</button>
 
 <div class="shortcut-guide">
     Space：タイマー停止／再生　　Enter：次へ
@@ -564,14 +524,14 @@ let words = [];
 let totalWords = 0;
 let answerTimer;
 let timer;
-let timeLeft = 5;
+let timeLeft = 10;
 let firstQuestion = true;
 let paused = false;
 let reviewWords = [];
 let currentWord = null;
 let isReviewing = false;
     
-const totalTime = 5;
+const totalTime = 10;
 // -----------------------------
 // JSON読み込み
 // -----------------------------
@@ -664,7 +624,7 @@ const wasReviewing = isReviewing;
 isReviewing = false;
 
 // 非表示にする
-    document.querySelector(".timer-circle").style.display = "none";
+    document.getElementById("timerBar").style.display = "none";
     document.getElementById("timer").style.display = "none";
     document.getElementById("answer").style.display = "none";
     document.getElementById("showAnswerBtn").style.display = "none";
@@ -697,6 +657,7 @@ isReviewing = false;
     document.querySelector(".next-btn").style.display = "none";
     document.getElementById("timer").style.display = "none";
     document.getElementById("pauseBtn").style.display = "none";
+    document.getElementById("timerBar").style.display = "none";
 
     const sequence = ["READY", "3", "2", "1"];
     let index = 0;
@@ -724,6 +685,7 @@ isReviewing = false;
                 //タイマーと答えを見ると次へボタンを一旦非表示
                 document.getElementById("timer").style.display = "block";
                 document.getElementById("showAnswerBtn").style.display = "inline-block";
+                document.getElementById("timerBar").style.display = "block";
                 document.querySelector(".next-btn").style.display = "inline-block";
                 //進捗バー、数字一旦非表示
                 document.getElementById("progressText").style.display = "block";
@@ -797,11 +759,10 @@ function startTimer(){
 
     clearInterval(timer);
 
-    const circle = document.getElementById("progress");
-    const radius = 45;
-    const circumference = 2 * Math.PI * radius;
+    const bar = document.getElementById("timerBarFill");
 
-    circle.style.strokeDasharray = circumference;
+    // バーを満タンに戻す
+    bar.style.width = "100%";
 
     timer = setInterval(() => {
 
@@ -815,14 +776,14 @@ function startTimer(){
             timeLeft = 0;
         }
 
-        // 数字
+        // 残り秒数
         document.getElementById("timer").textContent =
             Math.ceil(timeLeft);
 
-        // 円形タイマー
+        // 横バーの残量
         const progress = timeLeft / totalTime;
-        circle.style.strokeDashoffset =
-            circumference - (progress * circumference);
+
+        bar.style.width = (progress * 100) + "%";
 
         // 時間切れ
         if(timeLeft <= 0){
@@ -942,7 +903,7 @@ function togglePause(){
     document.getElementById("completeButtons").style.display = "none";
     document.getElementById("progressText").style.display = "block";
     document.getElementById("progressBar").style.display = "block";
-    document.querySelector(".timer-circle").style.display = "block";
+    document.getElementById("timerBar").style.display = "block";
     document.getElementById("timer").style.display = "block";
     document.getElementById("showAnswerBtn").style.display = "inline-block";
     document.querySelector(".next-btn").style.display = "inline-block";
