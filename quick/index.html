@@ -473,21 +473,36 @@ async function checkLanguages(){
 
             if(!button) return;
 
-            const available =
-                data[category] && data[category][lang];
+           let available;
 
-            button.classList.add("show");
+if(category === "All"){
 
-            if(!available){
+    available =
+        data["Vocabulary"] &&
+        data["Vocabulary"][lang] &&
+        data["Expression"] &&
+        data["Expression"][lang];
 
-                button.classList.add("disabled");
+}else{
 
-                button.innerHTML =
-                    button.innerHTML + "<br>準備中";
+    available =
+        data[category] &&
+        data[category][lang];
 
-                button.onclick = null;
+}
 
-            }
+button.classList.add("show");
+
+if(!available){
+
+    button.classList.add("disabled");
+
+    button.innerHTML =
+        button.innerHTML + "<br>準備中";
+
+    button.onclick = null;
+
+}
 
         });
 
