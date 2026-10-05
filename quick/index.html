@@ -54,6 +54,13 @@ body{
     margin-bottom:10px;
 }
     
+#loadingMessage{
+    color:#666;
+    font-size:18px;
+    font-weight:bold;
+    margin:20px 0;
+}
+    
 @media(max-width:768px){
 
     .top-btn{
@@ -253,7 +260,10 @@ INTERPRETER TRAINING
 ※言語読み込みに時間がかかる場合があります。
 　再起動、ページの再読み込みをお試しください。
 </div>
-    
+
+<div id="loadingMessage">
+    言語データ読み込み中…
+</div>
 <div class="card">
 
 <h2>📚 Vocabulary（単語）</h2>
@@ -510,6 +520,7 @@ if(!available){
 
 }
 
+document.getElementById("loadingMessage").style.display = "none";
 
 function selectLanguage(category, lang){
 
