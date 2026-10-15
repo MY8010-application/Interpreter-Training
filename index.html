@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
-    
+
 <title>Interpreter Training</title>
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
+
 <style>
 
 *{
@@ -80,6 +82,7 @@ footer{
     color:#999;
     font-size:14px;
 }
+
 .quick{
     border-left:8px solid #4a6cff;
 }
@@ -91,17 +94,19 @@ footer{
 .interpretation{
     border-left:8px solid #ff9800;
 }
+
 .card{
     text-decoration:none;
     color:#333;
     display:block;
 }
+
 .card h2 span{
-font-size:16px;
-font-weight:normal;
+    font-size:16px;
+    font-weight:normal;
 }
 
-    /* ============================
+/* ============================
    アプリのように使う方法
 ============================ */
 
@@ -145,15 +150,13 @@ font-weight:normal;
     margin:0 auto;
     border-radius:12px;
 }
-    
-    
+
 @media(max-width:768px){
     .card h2 span{
-    font-size:20px;
+        font-size:20px;
     }
-    
-
 }
+
 </style>
 </head>
 
@@ -163,7 +166,6 @@ font-weight:normal;
 
 <h1>Interpreter Training</h1>
 <h2>通訳者養成プログラム</h2>
-
 
 </header>
 
@@ -183,19 +185,19 @@ onclick="location.href='summarization/index.html'">
 
 </div>
 
-
 <a href="short/index.html" class="card interpretation">
 
 <h2>Short Interpretation<span>（短文通訳練習）</span></h2>
 
 </a>
-    
+
 </div>
+
 <div class="app-guide">
 
 <h2></h2>
 
-<button class="app-guide-btn" onclick="toggleGuide()">
+<button id="guideBtn" class="app-guide-btn" onclick="toggleGuide()">
 アプリのように使う方法 ▶︎
 </button>
 
@@ -207,13 +209,15 @@ onclick="location.href='summarization/index.html'">
 </div>
 
 </div>
+
 <footer>
 
 © MY
 
 </footer>
-    <!-- ここまで既存のHTML -->
-    
+
+<!-- ここまで既存のHTML -->
+
 <script>
 
 if("serviceWorker" in navigator){
@@ -223,8 +227,8 @@ if("serviceWorker" in navigator){
 }
 
 </script>
-<script>
 
+<script>
 
 function toggleGuide(){
 
@@ -251,6 +255,7 @@ function toggleGuide(){
     }
 
 }
+
 </script>
 
 </body>
