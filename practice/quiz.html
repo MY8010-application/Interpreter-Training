@@ -247,9 +247,8 @@ body{
 
 
 <div class="chapter-info">
-    Chapter 1 / 15
-    <br>
-    0秒 ～ 3秒
+    <span id="chapterNumber">Chapter 1 / 15</span>
+    <span id="chapterTime">0秒 ～ 3秒</span>
 </div>
 
 <div class="progress-area">
@@ -307,7 +306,8 @@ body{
 <script>
 const audioId = localStorage.getItem("practiceAudio");
 const audioPlayer = document.getElementById("audioPlayer");
-
+let currentChapter = null;
+    
 if(audioId){
     audioPlayer.src = "audio/" + audioId;
     audioPlayer.load();
@@ -349,12 +349,33 @@ chapters.forEach((chapter, index) => {
     if(index === 0){
         button.classList.add("active");
     }
+    if(index === 0){
+    currentChapter = chapter;
+}
 
     button.textContent =
         `Chapter ${chapter.chapter}　${chapter.start}秒 ～ ${chapter.end}秒`;
+button.addEventListener("click", () => {
+    currentChapter = chapter;
+document.getElementById("chapterNumber").textContent =
+    `Chapter ${chapter.chapter} / ${chapters.length}`;
 
+document.getElementById("chapterTime").textContent =
+    `${chapter.start}秒 ～ ${chapter.end}秒`;
+    audioPlayer.currentTime = Number(chapter.start);
+
+    document.querySelectorAll(".chapter-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    playBtn.textContent = "▶";
+});
+    
     chapterList.appendChild(button);
 });
+
 
     }catch(error){
         alert("チャプター情報を取得できませんでした。");
@@ -428,6 +449,14 @@ audioPlayer.addEventListener("loadedmetadata", () => {
 
 audioPlayer.addEventListener("timeupdate", () => {
     currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+});
+
+audioPlayer.addEventListener("timeupdate", () => {
+    if(currentChapter && audioPlayer.currentTime >= Number(currentChapter.end)){
+        audioPlayer.pause();
+        audioPlayer.currentTime = Number(currentChapter.end);
+        playBtn.textContent = "▶";
+    }
 });
 
 
