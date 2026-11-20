@@ -163,7 +163,9 @@ body{
     color:white;
     font-size:28px;
 }
-
+.play-btn.paused{
+    background:#e53935;
+}
 .section-title{
     font-size:20px;
     font-weight:bold;
@@ -465,14 +467,17 @@ playBtn.addEventListener("click", () => {
     if(audioPlayer.paused){
         audioPlayer.play();
         playBtn.textContent = "Ⅱ";
+        playBtn.classList.add("paused");
     }else{
         audioPlayer.pause();
         playBtn.textContent = "▶";
+        playBtn.classList.remove("paused");
     }
 });
 
 audioPlayer.addEventListener("ended", () => {
     playBtn.textContent = "▶";
+    playBtn.classList.remove("paused");
 });
 
     
@@ -531,6 +536,7 @@ audioPlayer.addEventListener("timeupdate", () => {
         audioPlayer.pause();
         audioPlayer.currentTime = Number(currentChapter.end);
         playBtn.textContent = "▶";
+        playBtn.classList.remove("paused");
     }
 });
 const transcriptBtn = document.getElementById("transcriptBtn");
