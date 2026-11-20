@@ -312,11 +312,11 @@ body{
 </div>
 
 <button class="transcript-btn" id="transcriptBtn">
-日本語原稿を見る ▼
+テキストを見る ▼
 </button>
 
 <div class="transcript" id="transcript">
-    ここに日本語原稿が表示されます。
+    ここにテキストが表示されます。
 </div>
 
 <div class="controls">
@@ -483,6 +483,23 @@ audioPlayer.addEventListener("ended", () => {
 const backBtn = document.getElementById("backBtn");
 const forwardBtn = document.getElementById("forwardBtn");
 
+function updateChapterDisplay(chapter){
+    document.getElementById("chapterNumber").textContent =
+        `Chapter ${chapter.chapter} / ${chapters.length}`;
+
+    document.getElementById("chapterTime").textContent =
+        `${chapter.start}秒 ～ ${chapter.end}秒`;
+
+    document.getElementById("transcript").textContent = chapter.text;
+
+    document.querySelectorAll(".chapter-marker").forEach(btn => {
+        btn.classList.toggle(
+            "active",
+            btn.textContent === String(chapter.chapter)
+        );
+    });
+}
+
 backBtn.addEventListener("click", () => {
     if(!currentChapter) return;
 
@@ -490,11 +507,24 @@ backBtn.addEventListener("click", () => {
         chapter => chapter === currentChapter
     );
 
-    const previousChapter = chapters[currentIndex - 1];
+    if(currentIndex > 0){
+        currentChapter = chapters[currentIndex - 1];
+        audioPlayer.currentTime = Number(currentChapter.start);
+        updateChapterDisplay(currentChapter);
+    }
+});
 
-    if(previousChapter){
-        currentChapter = previousChapter;
-        audioPlayer.currentTime = Number(previousChapter.start);
+forwardBtn.addEventListener("click", () => {
+    if(!currentChapter) return;
+
+    const currentIndex = chapters.findIndex(
+        chapter => chapter === currentChapter
+    );
+
+    if(currentIndex < chapters.length - 1){
+        currentChapter = chapters[currentIndex + 1];
+        audioPlayer.currentTime = Number(currentChapter.start);
+        updateChapterDisplay(currentChapter);
     }
 });
 
@@ -563,10 +593,10 @@ const transcript = document.getElementById("transcript");
 transcriptBtn.addEventListener("click", () => {
     if(transcript.style.display === "none"){
         transcript.style.display = "block";
-        transcriptBtn.textContent = "日本語原稿を閉じる ▲";
+        transcriptBtn.textContent = "テキストを閉じる ▲";
     }else{
         transcript.style.display = "none";
-        transcriptBtn.textContent = "日本語原稿を見る ▼";
+        transcriptBtn.textContent = "テキストを見る ▼";
     }
 });
 
