@@ -97,6 +97,32 @@ body{
     margin:25px 0;
 }
 
+.chapter-markers{
+    position:relative;
+    height:24px;
+    margin-bottom:4px;
+}
+
+.chapter-marker{
+    position:absolute;
+    top:0;
+    transform:translateX(-50%);
+    width:26px;
+    height:24px;
+    padding:0;
+    border:none;
+    border-radius:6px;
+    background:#eee;
+    color:#666;
+    font-size:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.chapter-marker.active{
+    background:#4255ff;
+    color:white;
+}
+    
 #seekBar{
     width:100%;
     cursor:pointer;
@@ -252,12 +278,24 @@ body{
 </div>
 
 <div class="progress-area">
+
+    <div class="chapter-markers" id="chapterMarkers"></div>
+
     <input type="range" id="seekBar" min="0" max="100" value="0">
 
-<div class="time-display">
-    <span id="currentTime">0:00</span>
-    <span id="durationTime">0:00</span>
+    <div class="time-display">
+        <span id="currentTime">0:00</span>
+        <span id="durationTime">0:00</span>
+    </div>
+
 </div>
+
+<button class="transcript-btn" id="transcriptBtn">
+日本語原稿を見る ▼
+</button>
+
+<div class="transcript" id="transcript">
+    ここに日本語原稿が表示されます。
 </div>
 
 <div class="controls">
@@ -270,31 +308,7 @@ body{
 
 </div>
 
-<div class="section-title">チャプター一覧</div>
 
-<div class="chapter-list" id="chapterList">
-
-<button class="chapter-btn active">
-    Chapter 1　0秒 ～ 3秒
-</button>
-
-<button class="chapter-btn">
-    Chapter 2　3秒 ～ 7秒
-</button>
-
-<button class="chapter-btn">
-    Chapter 3　7秒 ～ 12秒
-</button>
-
-</div>
-    
-<button class="transcript-btn" id="transcriptBtn">
-日本語原稿を見る ▼
-</button>
-
-<div class="transcript" id="transcript">
-    ここに日本語原稿が表示されます。
-</div>
 
 <button class="back-btn" onclick="location.href='index.html'">
 ← 音声選択に戻る
@@ -338,57 +352,86 @@ const chapters = await response.json();
 if(!Array.isArray(chapters)){
     throw new Error("取得データの形式が正しくありません");
 }
-        const chapterList = document.getElementById("chapterList");
 
-chapterList.innerHTML = "";
+const chapterMarkers = document.getElementById("chapterMarkers");
+
+chapterMarkers.innerHTML = "";
+
+const totalDuration = Number(chapters[chapters.length - 1].end);
 
 chapters.forEach((chapter, index) => {
-    const button = document.createElement("button");
+    
+const button = document.createElement("button");
 
-    button.className = "chapter-btn";
+    button.className = "chapter-marker";
+    button.textContent = chapter.chapter;
+    button.style.left = `${(Number(chapter.start) / totalDuration) * 100}%`;
+    
     if(index === 0){
         button.classList.add("active");
+        currentChapter = chapter;
     }
-    if(index === 0){
-    currentChapter = chapter;
+
+    button.addEventListener("click", () => {
+        currentChapter = chapter;
+
+        audioPlayer.currentTime = Number(chapter.start);
+
+        document.getElementById("chapterNumber").textContent =
+            `Chapter ${chapter.chapter} / ${chapters.length}`;
+
+        document.getElementById("chapterTime").textContent =
+            `${chapter.start}秒 ～ ${chapter.end}秒`;
+
+        document.getElementById("transcript").textContent = chapter.text;
+
+        document.querySelectorAll(".chapter-marker").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        playBtn.textContent = "▶";
+    });
+
+    chapterMarkers.appendChild(button);
+});
+
+if(chapters.length > 0){
+    const firstChapter = chapters[0];
+
+    document.getElementById("chapterNumber").textContent =
+        `Chapter ${firstChapter.chapter} / ${chapters.length}`;
+
+    document.getElementById("chapterTime").textContent =
+        `${firstChapter.start}秒 ～ ${firstChapter.end}秒`;
+
+    document.getElementById("transcript").textContent = firstChapter.text;
 }
-    
-if(index === 0){
+audioPlayer.addEventListener("timeupdate", () => {
+    const chapter = [...chapters].reverse().find(ch =>
+        audioPlayer.currentTime >= Number(ch.start)
+    );
+
+    if(!chapter || chapter === currentChapter) return;
+
+    currentChapter = chapter;
+
     document.getElementById("chapterNumber").textContent =
         `Chapter ${chapter.chapter} / ${chapters.length}`;
 
     document.getElementById("chapterTime").textContent =
         `${chapter.start}秒 ～ ${chapter.end}秒`;
-}
-document.getElementById("transcript").textContent = chapter.text;
 
-button.textContent =
-        `Chapter ${chapter.chapter}　${chapter.start}秒 ～ ${chapter.end}秒`;
-button.addEventListener("click", () => {
-    currentChapter = chapter;
+    document.getElementById("transcript").textContent = chapter.text;
 
-document.getElementById("chapterNumber").textContent =
-    `Chapter ${chapter.chapter} / ${chapters.length}`;
-
-document.getElementById("chapterTime").textContent =
-    `${chapter.start}秒 ～ ${chapter.end}秒`;
-
-document.getElementById("transcript").textContent = chapter.text;
-    
-    audioPlayer.currentTime = Number(chapter.start);
-
-    document.querySelectorAll(".chapter-btn").forEach(btn => {
-        btn.classList.remove("active");
+    document.querySelectorAll(".chapter-marker").forEach(btn => {
+        btn.classList.toggle(
+            "active",
+            btn.textContent === String(chapter.chapter)
+        );
     });
-
-    button.classList.add("active");
-
-    playBtn.textContent = "▶";
 });
-    
-    chapterList.appendChild(button);
-});
-
 
     }catch(error){
         alert("チャプター情報を取得できませんでした。");
