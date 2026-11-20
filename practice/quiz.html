@@ -394,6 +394,22 @@ forwardBtn.addEventListener("click", () => {
     );
 });
 
+const seekBar = document.getElementById("seekBar");
+
+audioPlayer.addEventListener("timeupdate", () => {
+    if(audioPlayer.duration){
+        seekBar.value =
+            (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    }
+});
+
+seekBar.addEventListener("input", () => {
+    if(audioPlayer.duration){
+        audioPlayer.currentTime =
+            (seekBar.value / 100) * audioPlayer.duration;
+    }
+});
+
 </script>
 
 </body>
