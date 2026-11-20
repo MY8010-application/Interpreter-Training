@@ -234,22 +234,10 @@ body{
     </div>
 </div>
 
-<div class="section-title">実践音声を選択</div>
+<div class="section-title">Practiceを選択</div>
 
-<div class="audio-list">
-
-<button class="audio-btn" onclick="selectAudio('practice01')">
-    実践音声①
-</button>
-
-<button class="audio-btn" onclick="selectAudio('practice02')">
-    実践音声②
-</button>
-
-<button class="audio-btn" onclick="selectAudio('practice03')">
-    実践音声③
-</button>
-
+<div class="audio-list" id="audioList">
+    <p>音声一覧を読み込んでいます...</p>
 </div>
 
 <button class="back-btn" onclick="location.href='../index.html'">
@@ -260,10 +248,45 @@ body{
 </div>
 
 <script>
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzOwRsJPvgaC4jyign9XRXNlAqvxEKdDSFpJFkjP9DHnADH5yktqsIK7ILfAvv-8ELP/exec";
+
+async function loadAudioList(){
+    const audioList = document.getElementById("audioList");
+
+    try{
+        const response = await fetch(GAS_URL);
+        const audioIds = await response.json();
+
+        audioList.innerHTML = "";
+
+        audioIds.forEach(audioId => {
+            const button = document.createElement("button");
+
+            button.className = "audio-btn";
+            button.textContent = audioId
+                .replace(".wav","")
+                .replace("practice","Practice ");
+
+            button.onclick = () => selectAudio(audioId);
+
+            audioList.appendChild(button);
+        });
+
+        if(audioIds.length === 0){
+            audioList.innerHTML = "<p>音声が登録されていません。</p>";
+        }
+
+    }catch(error){
+        audioList.innerHTML = "<p>音声一覧を読み込めませんでした。</p>";
+    }
+}
+
 function selectAudio(audioId){
     localStorage.setItem("practiceAudio",audioId);
-    alert("音声再生画面は次の段階で作成します。");
+    location.href = "quiz.html";
 }
+
+loadAudioList();
 </script>
 
 </body>
