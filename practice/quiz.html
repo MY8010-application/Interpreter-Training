@@ -241,6 +241,11 @@ body{
 
 <div class="audio-title" id="audioTitle">Practice</div>
 
+<audio id="audioPlayer" preload="auto">
+    <source src="" type="audio/wav">
+</audio>
+
+
 <div class="chapter-info">
     Chapter 1 / 15
     <br>
@@ -301,7 +306,13 @@ body{
 
 <script>
 const audioId = localStorage.getItem("practiceAudio");
+const audioPlayer = document.getElementById("audioPlayer");
 
+if(audioId){
+    audioPlayer.src = "audio/" + audioId;
+    audioPlayer.load();
+}
+    
 if(audioId){
     document.getElementById("audioTitle").textContent =
         audioId.replace(".wav","").replace("practice","Practice ");
