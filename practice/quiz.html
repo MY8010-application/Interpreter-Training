@@ -528,20 +528,6 @@ forwardBtn.addEventListener("click", () => {
     }
 });
 
-forwardBtn.addEventListener("click", () => {
-    if(!currentChapter) return;
-
-    const currentIndex = chapters.findIndex(
-        chapter => chapter === currentChapter
-    );
-
-    const nextChapter = chapters[currentIndex + 1];
-
-    if(nextChapter){
-        currentChapter = nextChapter;
-        audioPlayer.currentTime = Number(nextChapter.start);
-    }
-});
 
 const seekBar = document.getElementById("seekBar");
 
