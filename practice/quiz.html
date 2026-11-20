@@ -44,12 +44,6 @@ body{
     font-size:14px;
     font-weight:bold;
     cursor:pointer;
-    transition:.2s;
-}
-
-.top-btn:hover{
-    transform:translateY(-2px);
-    background:#666;
 }
 
 .app-title{
@@ -84,69 +78,112 @@ body{
     background:white;
     border-radius:22px;
     padding:30px;
-    text-align:left;
     box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
-.card h2{
-    text-align:center;
+.audio-title{
+    font-size:24px;
+    font-weight:bold;
     margin-bottom:25px;
 }
 
-.step{
-    display:flex;
-    align-items:flex-start;
-    gap:15px;
-    margin-bottom:25px;
-}
-
-.icon{
-    font-size:34px;
-    width:50px;
-    text-align:center;
-    flex-shrink:0;
-}
-
-.text h3{
-    margin:0 0 5px;
-    font-size:20px;
-}
-
-.text p{
-    margin:0;
+.chapter-info{
+    margin-bottom:20px;
     color:#666;
-    line-height:1.6;
+    font-size:16px;
+}
+
+.progress-area{
+    margin:25px 0;
+}
+
+#seekBar{
+    width:100%;
+    cursor:pointer;
+}
+
+.time-display{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    color:#777;
+    margin-top:5px;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    margin:25px 0;
+}
+
+.control-btn{
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:#eee;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.play-btn{
+    width:70px;
+    height:70px;
+    background:#4255ff;
+    color:white;
+    font-size:28px;
 }
 
 .section-title{
-    text-align:center;
-    font-size:22px;
+    font-size:20px;
     font-weight:bold;
     margin:35px 0 15px;
 }
 
-.audio-list{
+.chapter-list{
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:10px;
 }
 
-.audio-btn{
+.chapter-btn{
     width:100%;
-    padding:20px;
+    padding:15px;
     border:2px solid #ddd;
-    border-radius:18px;
+    border-radius:14px;
     background:#f5f5f5;
-    font-size:20px;
-    font-weight:bold;
+    font-size:16px;
+    text-align:left;
     cursor:pointer;
-    transition:.2s;
 }
 
-.audio-btn:hover{
-    transform:translateY(-3px);
+.chapter-btn.active{
     border-color:#4255ff;
     background:#eef0ff;
+}
+
+.transcript-btn{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#eee;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.transcript{
+    display:none;
+    margin-top:15px;
+    padding:20px;
+    background:#f5f5f5;
+    border-radius:14px;
+    text-align:left;
+    line-height:1.8;
 }
 
 .back-btn{
@@ -178,13 +215,8 @@ body{
         font-size:28px;
     }
 
-    .step{
-        flex-direction:row;
-    }
-
-    .audio-btn{
-        padding:17px;
-        font-size:18px;
+    .controls{
+        gap:15px;
     }
 }
 </style>
@@ -194,99 +226,124 @@ body{
 
 <div class="container">
 
-<button class="top-btn" onclick="location.href='../index.html'">
-← トップへ
+<button class="top-btn" onclick="location.href='index.html'">
+← 戻る
 </button>
 
 <div class="app-title">
     <div class="title-main">Practice</div>
     <div class="title-sub">実践通訳練習</div>
-    <p>Coming soon...</p>
 </div>
 
 <div class="logo">INTERPRETER TRAINING</div>
 
 <div class="card">
 
-<h2>練習の流れ</h2>
+<div class="audio-title" id="audioTitle">Practice</div>
 
-<div class="step">
-    <div class="icon">🎧</div>
-    <div class="text">
-        <h3>① 音声を聞く</h3>
-        <p>日本語の音声を聞き、内容を理解します。</p>
+<div class="chapter-info">
+    Chapter 1 / 15
+    <br>
+    0秒 ～ 3秒
+</div>
+
+<div class="progress-area">
+    <input type="range" id="seekBar" min="0" max="100" value="0">
+
+    <div class="time-display">
+        <span>0:00</span>
+        <span>1:32</span>
     </div>
 </div>
 
-<div class="step">
-    <div class="icon">🧠</div>
-    <div class="text">
-        <h3>② チャプターごとに通訳する</h3>
-        <p>音声はチャプターの終わりで自動停止します。聞いた内容を外国語に通訳してください。</p>
-    </div>
+<div class="controls">
+
+<button class="control-btn">↶</button>
+
+<button class="control-btn play-btn">▶</button>
+
+<button class="control-btn">↷</button>
+
 </div>
 
-<div class="step">
-    <div class="icon">📖</div>
-    <div class="text">
-        <h3>③ 原文を確認する</h3>
-        <p>練習終了後、音声に対応した日本語の文章を確認できます。</p>
-    </div>
+<div class="section-title">チャプター一覧</div>
+
+<div class="chapter-list" id="chapterList">
+
+<button class="chapter-btn active">
+    Chapter 1　0秒 ～ 3秒
+</button>
+
+<button class="chapter-btn">
+    Chapter 2　3秒 ～ 7秒
+</button>
+
+<button class="chapter-btn">
+    Chapter 3　7秒 ～ 12秒
+</button>
+
 </div>
 
-<div class="section-title">Practiceを選択</div>
+<button class="transcript-btn">
+日本語原稿を見る ▼
+</button>
 
-<div class="audio-list" id="audioList">
-    <p>音声一覧を読み込んでいます...</p>
+<div class="transcript">
+    ここに選択したチャプターの日本語原稿が表示されます。
 </div>
 
-<button class="back-btn" onclick="location.href='../index.html'">
-    ← 戻る
+<button class="back-btn" onclick="location.href='index.html'">
+← 音声選択に戻る
 </button>
 
 </div>
 </div>
 
 <script>
+const audioId = localStorage.getItem("practiceAudio");
+
+if(audioId){
+    document.getElementById("audioTitle").textContent =
+        audioId.replace(".wav","").replace("practice","Practice ");
+}else{
+    document.getElementById("audioTitle").textContent = "音声が選択されていません";
+}
 const GAS_URL = "https://script.google.com/macros/s/AKfycbzOwRsJPvgaC4jyign9XRXNlAqvxEKdDSFpJFkjP9DHnADH5yktqsIK7ILfAvv-8ELP/exec";
 
-async function loadAudioList(){
-    const audioList = document.getElementById("audioList");
+async function loadChapters(){
+    if(!audioId) return;
 
     try{
-        const response = await fetch(GAS_URL);
-        const audioIds = await response.json();
+        const response = await fetch(
+            GAS_URL + "?audioId=" + encodeURIComponent(audioId)
+        );
 
-        audioList.innerHTML = "";
+        const chapters = await response.json();
 
-        audioIds.forEach(audioId => {
-            const button = document.createElement("button");
+        const chapterList = document.getElementById("chapterList");
 
-            button.className = "audio-btn";
-            button.textContent = audioId
-                .replace(".wav","")
-                .replace("practice","Practice ");
+chapterList.innerHTML = "";
 
-            button.onclick = () => selectAudio(audioId);
+chapters.forEach((chapter, index) => {
+    const button = document.createElement("button");
 
-            audioList.appendChild(button);
-        });
+    button.className = "chapter-btn";
+    if(index === 0){
+        button.classList.add("active");
+    }
 
-        if(audioIds.length === 0){
-            audioList.innerHTML = "<p>音声が登録されていません。</p>";
-        }
+    button.textContent =
+        `Chapter ${chapter.chapter}　${chapter.start}秒 ～ ${chapter.end}秒`;
+
+    chapterList.appendChild(button);
+});
 
     }catch(error){
-        audioList.innerHTML = "<p>音声一覧を読み込めませんでした。</p>";
+        alert("チャプター情報を取得できませんでした。");
     }
 }
 
-function selectAudio(audioId){
-    localStorage.setItem("practiceAudio",audioId);
-    location.href = "quiz.html";
-}
-
-loadAudioList();
+loadChapters();
 </script>
 
 </body>
