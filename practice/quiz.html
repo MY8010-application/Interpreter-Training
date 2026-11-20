@@ -588,6 +588,33 @@ transcriptBtn.addEventListener("click", () => {
         transcriptBtn.textContent = "テキストを見る ▼";
     }
 });
+document.addEventListener("keydown", (e) => {
+    if(e.target.tagName === "INPUT" ||
+       e.target.tagName === "TEXTAREA" ||
+       e.target.isContentEditable){
+        return;
+    }
+
+    if(e.code === "Space"){
+        e.preventDefault();
+        playBtn.click();
+    }
+
+    if(e.code === "ArrowLeft"){
+        e.preventDefault();
+        backBtn.click();
+    }
+
+    if(e.code === "ArrowRight"){
+        e.preventDefault();
+        forwardBtn.click();
+    }
+
+    if(e.code === "ArrowDown"){
+        e.preventDefault();
+        transcriptBtn.click();
+    }
+});
 
 </script>
 
