@@ -98,26 +98,28 @@ body{
 }
 
 .chapter-markers{
-    position:relative;
-    height:24px;
-    margin-bottom:4px;
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:6px;
+    height:auto;
+    margin-bottom:10px;
 }
 
 .chapter-marker{
-    position:absolute;
-    top:0;
-    transform:translateX(-50%);
-    width:26px;
-    height:24px;
+    position:static;
+    transform:none;
+    width:100%;
+    height:32px;
     padding:0;
     border:none;
     border-radius:6px;
     background:#eee;
     color:#666;
-    font-size:12px;
+    font-size:14px;
     font-weight:bold;
     cursor:pointer;
 }
+    
 .chapter-marker.active{
     background:#4255ff;
     color:white;
@@ -245,6 +247,21 @@ body{
 
     .controls{
         gap:15px;
+    }
+        .chapter-markers{
+        display:grid;
+        grid-template-columns:repeat(8,1fr);
+        gap:6px;
+        height:auto;
+        margin-bottom:10px;
+    }
+
+    .chapter-marker{
+        position:static;
+        transform:none;
+        width:100%;
+        height:32px;
+        font-size:14px;
     }
 }
 </style>
