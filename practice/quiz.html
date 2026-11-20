@@ -342,6 +342,7 @@ body{
 const audioId = localStorage.getItem("practiceAudio");
 const audioPlayer = document.getElementById("audioPlayer");
 let currentChapter = null;
+let chapters = [];
     
 if(audioId){
     audioPlayer.src = "audio/" + audioId;
@@ -368,19 +369,17 @@ if(!response.ok){
     throw new Error("GASとの通信に失敗しました");
 }
 
-const chapters = await response.json();
+chapters = await response.json();
 
 if(!Array.isArray(chapters)){
     throw new Error("取得データの形式が正しくありません");
 }
 
 const chapterMarkers = document.getElementById("chapterMarkers");
-
-chapterMarkers.innerHTML = "";
+        chapterMarkers.innerHTML = "";
 
 const totalDuration = Number(chapters[chapters.length - 1].end);
-
-chapters.forEach((chapter, index) => {
+        chapters.forEach((chapter, index) => {
     
 const button = document.createElement("button");
 
@@ -485,14 +484,33 @@ const backBtn = document.getElementById("backBtn");
 const forwardBtn = document.getElementById("forwardBtn");
 
 backBtn.addEventListener("click", () => {
-    audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
+    if(!currentChapter) return;
+
+    const currentIndex = chapters.findIndex(
+        chapter => chapter === currentChapter
+    );
+
+    const previousChapter = chapters[currentIndex - 1];
+
+    if(previousChapter){
+        currentChapter = previousChapter;
+        audioPlayer.currentTime = Number(previousChapter.start);
+    }
 });
 
 forwardBtn.addEventListener("click", () => {
-    audioPlayer.currentTime = Math.min(
-        audioPlayer.duration,
-        audioPlayer.currentTime + 5
+    if(!currentChapter) return;
+
+    const currentIndex = chapters.findIndex(
+        chapter => chapter === currentChapter
     );
+
+    const nextChapter = chapters[currentIndex + 1];
+
+    if(nextChapter){
+        currentChapter = nextChapter;
+        audioPlayer.currentTime = Number(nextChapter.start);
+    }
 });
 
 const seekBar = document.getElementById("seekBar");
