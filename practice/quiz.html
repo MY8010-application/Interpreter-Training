@@ -263,11 +263,11 @@ body{
 
 <div class="controls">
 
-<button class="control-btn">↶</button>
+<button class="control-btn" id="backBtn">↶</button>
 
 <button class="control-btn play-btn" id="playBtn">▶</button>
 
-<button class="control-btn">↷</button>
+<button class="control-btn" id="forwardBtn">↷</button>
 
 </div>
 
@@ -377,6 +377,21 @@ playBtn.addEventListener("click", () => {
 
 audioPlayer.addEventListener("ended", () => {
     playBtn.textContent = "▶";
+});
+
+    
+const backBtn = document.getElementById("backBtn");
+const forwardBtn = document.getElementById("forwardBtn");
+
+backBtn.addEventListener("click", () => {
+    audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
+});
+
+forwardBtn.addEventListener("click", () => {
+    audioPlayer.currentTime = Math.min(
+        audioPlayer.duration,
+        audioPlayer.currentTime + 5
+    );
 });
 
 </script>
