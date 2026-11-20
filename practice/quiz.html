@@ -265,7 +265,7 @@ body{
 
 <button class="control-btn">↶</button>
 
-<button class="control-btn play-btn">▶</button>
+<button class="control-btn play-btn" id="playBtn">▶</button>
 
 <button class="control-btn">↷</button>
 
@@ -362,6 +362,23 @@ chapters.forEach((chapter, index) => {
 }
 
 loadChapters();
+
+const playBtn = document.getElementById("playBtn");
+
+playBtn.addEventListener("click", () => {
+    if(audioPlayer.paused){
+        audioPlayer.play();
+        playBtn.textContent = "Ⅱ";
+    }else{
+        audioPlayer.pause();
+        playBtn.textContent = "▶";
+    }
+});
+
+audioPlayer.addEventListener("ended", () => {
+    playBtn.textContent = "▶";
+});
+
 </script>
 
 </body>
