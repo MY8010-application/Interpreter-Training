@@ -287,8 +287,8 @@ body{
 </button>
 
 </div>
-
-<button class="transcript-btn">
+    
+<button class="transcript-btn" id="transcriptBtn">
 日本語原稿を見る ▼
 </button>
 
@@ -471,7 +471,18 @@ audioPlayer.addEventListener("timeupdate", () => {
         playBtn.textContent = "▶";
     }
 });
+const transcriptBtn = document.getElementById("transcriptBtn");
+const transcript = document.getElementById("transcript");
 
+transcriptBtn.addEventListener("click", () => {
+    if(transcript.style.display === "none"){
+        transcript.style.display = "block";
+        transcriptBtn.textContent = "日本語原稿を閉じる ▲";
+    }else{
+        transcript.style.display = "none";
+        transcriptBtn.textContent = "日本語原稿を見る ▼";
+    }
+});
 
 </script>
 
