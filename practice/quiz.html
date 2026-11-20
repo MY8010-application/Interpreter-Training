@@ -314,12 +314,19 @@ async function loadChapters(){
     if(!audioId) return;
 
     try{
-        const response = await fetch(
-            GAS_URL + "?audioId=" + encodeURIComponent(audioId)
-        );
+       const response = await fetch(
+    GAS_URL + "?audioId=" + encodeURIComponent(audioId)
+);
 
-        const chapters = await response.json();
+if(!response.ok){
+    throw new Error("GASとの通信に失敗しました");
+}
 
+const chapters = await response.json();
+
+if(!Array.isArray(chapters)){
+    throw new Error("取得データの形式が正しくありません");
+}
         const chapterList = document.getElementById("chapterList");
 
 chapterList.innerHTML = "";
