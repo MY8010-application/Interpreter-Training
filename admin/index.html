@@ -353,17 +353,17 @@ body{
     </div>
     
 <div class="stat-card">
-    <div class="stat-label">3コース合計 累計</div>
+    <div class="stat-label">Practice 累計</div>
     <div>
-        <span id="totalAccess" class="stat-number">—</span>
+        <span id="practiceAccess" class="stat-number">—</span>
         <span class="stat-unit">回</span>
     </div>
 </div>
 
 <div class="stat-card">
-    <div class="stat-label">Practice 累計</div>
+    <div class="stat-label">4コース合計 累計</div>
     <div>
-        <span id="practiceAccess" class="stat-number">—</span>
+        <span id="totalAccess" class="stat-number">—</span>
         <span class="stat-unit">回</span>
     </div>
 </div>
@@ -385,14 +385,14 @@ body{
 
 <div class="access-table">
 
-    <div class="access-row access-header">
-        <span>日付</span>
-        <span>合計</span>
-        <span>Quick</span>
-        <span>Summarization</span>
-        <span>Short</span>
-        <span>Practice</span>
-    </div>
+   <div class="access-row access-header">
+    <span>日付</span>
+    <span>Quick</span>
+    <span>Summarization</span>
+    <span>Short</span>
+    <span>Practice</span>
+    <span>合計</span>
+</div>
 
     <div id="accessList">
 
@@ -555,8 +555,6 @@ document.getElementById(
 
     <span>${day.date}</span>
 
-    <span>${day.count}回</span>
-
     <span>${day.Quick}回</span>
 
     <span>${day.Summarization}回</span>
@@ -564,6 +562,8 @@ document.getElementById(
     <span>${day.Short}回</span>
 
     <span>${day.Practice || 0}回</span>
+
+    <span>${day.count}回</span>
 
 `;
                 accessList.appendChild(row);
