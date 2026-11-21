@@ -359,6 +359,15 @@ body{
         <span class="stat-unit">回</span>
     </div>
 </div>
+
+<div class="stat-card">
+    <div class="stat-label">Practice 累計</div>
+    <div>
+        <span id="practiceAccess" class="stat-number">—</span>
+        <span class="stat-unit">回</span>
+    </div>
+</div>
+    
 </div>
   
 </div>
@@ -382,6 +391,7 @@ body{
         <span>Quick</span>
         <span>Summarization</span>
         <span>Short</span>
+        <span>Practice</span>
     </div>
 
     <div id="accessList">
@@ -495,11 +505,17 @@ document.getElementById(
     data.courseTotals?.Short || 0;
 
 document.getElementById(
+    "practiceAccess"
+).textContent =
+    data.courseTotals?.Practice || 0;
+
+document.getElementById(
     "totalAccess"
 ).textContent =
     (data.courseTotals?.Quick || 0) +
     (data.courseTotals?.Summarization || 0) +
-    (data.courseTotals?.Short || 0);
+    (data.courseTotals?.Short || 0) +
+    (data.courseTotals?.Practice || 0);
 
         document.getElementById(
             "weeklyTotal"
@@ -546,6 +562,8 @@ document.getElementById(
     <span>${day.Summarization}回</span>
 
     <span>${day.Short}回</span>
+
+    <span>${day.Practice || 0}回</span>
 
 `;
                 accessList.appendChild(row);
