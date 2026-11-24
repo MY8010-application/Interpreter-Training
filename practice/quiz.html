@@ -603,7 +603,7 @@ const transcriptBtn = document.getElementById("transcriptBtn");
 const transcript = document.getElementById("transcript");
 
 transcriptBtn.addEventListener("click", () => {
-    if(transcript.style.display === "none"){
+       if(getComputedStyle(transcript).display === "none"){
         transcript.style.display = "block";
         transcriptBtn.textContent = "テキストを閉じる ▲";
     }else{
